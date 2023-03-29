@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -8,5 +8,6 @@ router.get("/", function (req, res, next) {
 
 router.use("/users", require("../routes/usersRoutes"));
 router.use("/posts", require("../routes/postsRoutes"));
+router.use("/comments", require("../routes/commentsRoutes"));
 
 module.exports = router;
