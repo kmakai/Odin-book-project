@@ -12,6 +12,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "A password is required for the user"],
+    select: false,
   },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

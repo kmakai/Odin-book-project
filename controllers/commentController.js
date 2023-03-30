@@ -10,7 +10,7 @@ const updateAComment = controllerFactory.updateOne(Comment);
 const deleteAComment = controllerFactory.deleteOne(Comment);
 
 const getPostComments = asyncHandler(async (req, res, next) => {
-  let postId = req.params.postId;
+  let postId = req.params.id;
   const docs = await Comment.find({ post: postId });
 
   res.status(200).json({ status: "success", results: docs.length, data: docs });

@@ -3,6 +3,9 @@ const router = express.Router();
 
 const postController = require("../controllers/postController");
 const commentContoller = require("../controllers/commentController");
+const authController = require("../controllers/authController");
+
+router.use(authController.protected);
 
 router
   .route("/")
@@ -15,6 +18,6 @@ router
   .patch(postController.updatePost)
   .delete(postController.deletePost);
 
-router.route("/:postId/comments").get(commentContoller.getPostComments);
+router.route("/:id/comments").get(commentContoller.getPostComments);
 
 module.exports = router;

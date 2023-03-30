@@ -1,24 +1,24 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 
-const getOne = (Model) =>
+const getOne = (Model, popOptions) =>
   asyncHandler(async (req, res, next) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
       res.status(404);
       throw new Error("That id is invalid");
     }
+    console.log(req.params.id);
 
-    const doc = await Model.findById(req.params.id);
-    console.log("doc");
+    let query = Model.findById(req.params.id);
+    if (popOptions) query = query.populate(popOptions);
+    const doc = await query;
 
     if (!doc) {
       res.status(404);
       throw new Error("No document found");
     }
 
-    res
-      .status(200)
-      .json({ status: "success", message: "here is the Post", data: doc });
+    res.status(200).json({ status: "success", data: doc });
   });
 
 const createOne = (Model) =>
@@ -32,10 +32,7 @@ const createOne = (Model) =>
 
 const getAll = (Model) =>
   asyncHandler(async (req, res, next) => {
-    let postId = req.params.postId;
-    const docs = postId
-      ? await Model.find({ post: postId })
-      : await Model.find();
+    const docs = await Model.find();
 
     if (docs.length === 0) {
       res.status(404);
