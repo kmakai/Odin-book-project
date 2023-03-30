@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const postController = require("../controllers/postController");
+const commentContoller = require("../controllers/commentController");
 
-/* GET users listing. */
 router
   .route("/")
   .get(postController.getPosts)
@@ -14,5 +14,7 @@ router
   .get(postController.getAPost)
   .patch(postController.updatePost)
   .delete(postController.deletePost);
+
+router.route("/:postId/comments").get(commentContoller.getPostComments);
 
 module.exports = router;

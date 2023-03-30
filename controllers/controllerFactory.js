@@ -23,7 +23,7 @@ const getOne = (Model) =>
 
 const createOne = (Model) =>
   asyncHandler(async (req, res, next) => {
-    req.body.user = "6424adf4dd7744621169eddc";
+    req.body.user && "6424adf4dd7744621169eddc";
     const doc = await Model.create(req.body);
     res
       .status(200)
@@ -32,14 +32,19 @@ const createOne = (Model) =>
 
 const getAll = (Model) =>
   asyncHandler(async (req, res, next) => {
-    const docs = await Model.find();
+    let postId = req.params.postId;
+    const docs = postId
+      ? await Model.find({ post: postId })
+      : await Model.find();
 
     if (docs.length === 0) {
       res.status(404);
       throw new Error("No documents found");
     }
 
-    res.status(200).json({ status: "success", data: docs });
+    res
+      .status(200)
+      .json({ status: "success", results: docs.length, data: docs });
   });
 
 const updateOne = (Model) =>
