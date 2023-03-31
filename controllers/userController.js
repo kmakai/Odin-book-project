@@ -18,7 +18,7 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 });
 
 const requestFriend = asyncHandler(async (req, res, next) => {
-  const requestedFriend = await User.findOne({ _id: req.params.id });
+  const requestedFriend = await User.findById(req.params.id);
   if (!requestedFriend) throw new Error("There is not such person");
   const { user } = req;
 
@@ -41,7 +41,7 @@ const requestFriend = asyncHandler(async (req, res, next) => {
 });
 
 const acceptFriend = asyncHandler(async (req, res, next) => {
-  const requester = await User.findOne({ _id: req.params.id });
+  const requester = await User.findById(req.params.id);
   if (!requester) throw new Error("There is not such person");
 
   const { user } = req;
@@ -60,7 +60,7 @@ const acceptFriend = asyncHandler(async (req, res, next) => {
 });
 
 const rejectFriend = asyncHandler(async (req, res, next) => {
-  const requester = await User.findOne({ _id: req.params.id });
+  const requester = await User.findById(req.params.id);
   if (!requester) throw new Error("There is not such person");
 
   const { user } = req;
@@ -78,7 +78,7 @@ const rejectFriend = asyncHandler(async (req, res, next) => {
 });
 
 const removeFriend = asyncHandler(async (req, res, next) => {
-  const friend = await User.findOne({ _id: req.params.id });
+  const friend = await User.findById(req.params.id);
   if (!friend) throw new Error("There is not such person");
 
   const { user } = req;

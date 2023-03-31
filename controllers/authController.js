@@ -97,6 +97,10 @@ const protected = asyncHandler(async (req, res, next) => {
   }
 });
 
+/////////////////////////////// PASSPORT FACEBOOK AUTH
+const passport = require("passport");
+const facebookStrategy = require("passport-facebook");
+
 module.exports = {
   createNewUser,
   loginUser,

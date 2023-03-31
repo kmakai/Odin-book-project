@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const passport = require("passport");
 
 // DATABASE
 const connectDB = require("./DB/db");
@@ -11,6 +12,8 @@ const connectDB = require("./DB/db");
 const indexRouter = require("./routes/index");
 
 const app = express();
+app.use(passport.initialize());
+app.use(passport.session());
 
 //view engine setup
 // app.set("views", path.join(__dirname, "views"));
