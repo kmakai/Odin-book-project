@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.send("Hello from the api");
+  res.render("base");
 });
 
 router.use("/users", require("../routes/usersRoutes"));
