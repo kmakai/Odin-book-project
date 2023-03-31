@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 
 const commentContoller = require("../controllers/commentController");
+const authController = require("../controllers/authController");
+
+router.use(authController.protected);
 
 router
   .route("/")

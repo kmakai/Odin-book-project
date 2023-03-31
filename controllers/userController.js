@@ -4,10 +4,7 @@ const controllerFactory = require("../controllers/controllerFactory");
 const User = require("../models/userModel");
 
 const getUsers = controllerFactory.getAll(User);
-
-const getAUser = controllerFactory.getOne(User, {
-  path: "friends friendRequests",
-});
+const getAUser = controllerFactory.getOne(User);
 
 const updateUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ status: "success", message: " User updated" });
