@@ -69,6 +69,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const protected = asyncHandler(async (req, res, next) => {
+  console.log(req.cookies);
   const { authorization } = req.headers; // deconstruct authorization from request.
   let token;
 
@@ -99,6 +100,8 @@ const protected = asyncHandler(async (req, res, next) => {
       res.status(401);
       throw new Error("Must login to access");
     }
+  } else {
+    if (req.originalUrl === "/") return res.redirect("/login");
   }
 
   // refuse access if no token
