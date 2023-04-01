@@ -377,10 +377,46 @@ video {
   display: none;
 }
   .header {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  border-width: 1px;
+  padding: 1rem;
+}
+
+  .logo {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+  .user-nav .sign-up {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+  /* Footer */
+  .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+  padding: 0.75rem;
+}
+
+  .footer .logo {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+  .footer-nav {
+  display: flex;
+  gap: 1rem;
 }
 
 *, ::before, ::after {

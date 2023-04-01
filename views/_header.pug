@@ -1,0 +1,13 @@
+header.header 
+  .logo 
+    a.home-link(href="/") Odin-book 
+  
+  .user-nav 
+    if user 
+      a.profile-link(href='/my-profile')
+        img.profile-img(src="#", alt="user image")
+        span.user-name= user.name
+      a.log-out Log out
+    else 
+      a.sign-up(href="#") Sign up
+

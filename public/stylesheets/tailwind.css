@@ -3,6 +3,27 @@
 
 @layer base {
   .header {
-    @apply text-4xl text-slate-700;
+    @apply flex justify-between items-center h-12 p-4 border;
+  }
+
+  .logo {
+    @apply text-2xl font-bold uppercase italic;
+  }
+
+  .user-nav .sign-up {
+    @apply font-bold text-xl;
+  }
+
+  /* Footer */
+  .footer {
+    @apply p-3 bg-slate-400 flex flex-col items-center;
+  }
+
+  .footer .logo {
+    @apply text-lg;
+  }
+
+  .footer-nav {
+    @apply flex gap-4;
   }
 }

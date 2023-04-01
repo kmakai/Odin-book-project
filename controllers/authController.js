@@ -50,6 +50,8 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email }).select("+password");
 
   if (user && (await bcrypt.compare(password, user.password))) {
+    const token = generateToken(user._id);
+    res.cookie("jwt", token);
     res.status(200).json({
       status: "success",
       message: "Logged in successfully",
@@ -57,7 +59,7 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        token: generateToken(user._id),
+        token,
       },
     });
   } else {
@@ -68,7 +70,6 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const protected = asyncHandler(async (req, res, next) => {
   const { authorization } = req.headers; // deconstruct authorization from request.
-
   let token;
 
   if (authorization && authorization.startsWith("Bearer")) {
@@ -86,14 +87,24 @@ const protected = asyncHandler(async (req, res, next) => {
       next();
     } catch (error) {
       res.status(401);
-      throw new Error("Not authorized");
+      throw new Error("Must login to access");
+    }
+  } else if (req.cookies.jwt) {
+    try {
+      token = req.cookies.jwt;
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decodedToken.id);
+      next();
+    } catch (error) {
+      res.status(401);
+      throw new Error("Must login to access");
     }
   }
 
   // refuse access if no token
   if (!token) {
     res.status(401);
-    throw new Error("Not authorized");
+    throw new Error("Must login to access");
   }
 });
 

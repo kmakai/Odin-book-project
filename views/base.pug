@@ -5,6 +5,11 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
     title Odin-book
     link(href="./stylesheets/style.css", rel="stylesheet")
+    script(src="./js/index.js" defer) 
   body
-    h1(class="header") Hello world!
-    p My starter template
+    include _header
+
+    main 
+      block content
+
+    include _footer
