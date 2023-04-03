@@ -1,6 +1,7 @@
-import { login } from "./loginhandlers";
+import { login, logout } from "./loginhandlers";
 
 const loginForm = document.querySelector(".loginform");
+const logoutBtn = document.querySelector(".log-out");
 
 loginForm &&
   loginForm.addEventListener("submit", (e) => {
@@ -10,3 +11,5 @@ loginForm &&
 
     login(email, password);
   });
+
+logoutBtn && logoutBtn.addEventListener("click", logout);

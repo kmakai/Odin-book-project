@@ -559,17 +559,20 @@ function hmrAccept(bundle, id) {
 },{}],"8h7jx":[function(require,module,exports) {
 var _loginhandlers = require("./loginhandlers");
 const loginForm = document.querySelector(".loginform");
+const logoutBtn = document.querySelector(".log-out");
 loginForm && loginForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     (0, _loginhandlers.login)(email, password);
 });
+logoutBtn && logoutBtn.addEventListener("click", (0, _loginhandlers.logout));
 
 },{"./loginhandlers":"lFxua"}],"lFxua":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login);
+parcelHelpers.export(exports, "logout", ()=>logout);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "api/v1";
@@ -579,6 +582,15 @@ const login = async (email, password)=>{
             email,
             password
         });
+        console.log(res.data);
+        if (res.data.status === "success") location.assign("/");
+    } catch (err) {
+        console.log(err.response.data);
+    }
+};
+const logout = async ()=>{
+    try {
+        const res = await (0, _axiosDefault.default).post(baseUrl + "/users/logout");
         console.log(res.data);
         if (res.data.status === "success") location.assign("/");
     } catch (err) {

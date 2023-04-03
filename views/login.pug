@@ -1,11 +1,12 @@
 extends base
 
 block content 
-  form.loginform 
-    label(for="email") Email:
-    input(type="email", name="email" id="email")
+  .loginpage
+    form.loginform 
+      label(for="email") EMAIL 
+        input(type="email", name="email" id="email" placeholder="name@example.com")
 
-    label(for="password") Email:
-    input(type="password", name="password" id="password")
+      label(for="password") PASSWORD 
+        input(type="password", name="password" id="password" placeholder="your password")
 
-    button(type="submit") Log in
+      button.login-btn(type="submit") Log in

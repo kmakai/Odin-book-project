@@ -11,3 +11,14 @@ export const login = async (email, password) => {
     console.log(err.response.data);
   }
 };
+
+export const logout = async () => {
+  try {
+    const res = await axios.post(baseUrl + "/users/logout");
+    console.log(res.data);
+
+    if (res.data.status === "success") location.assign("/");
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};

@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { promisify } = require("util");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -68,8 +69,14 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+const logOutUser = asyncHandler(async (req, res, next) => {
+  res.cookie("jwt", "", {
+    expires: new Date(Date.now() + 10 * 1000),
+  });
+  res.status(200).json({ status: "success" });
+});
+
 const protected = asyncHandler(async (req, res, next) => {
-  console.log(req.cookies);
   const { authorization } = req.headers; // deconstruct authorization from request.
   let token;
 
@@ -79,10 +86,18 @@ const protected = asyncHandler(async (req, res, next) => {
       token = authorization.split(" ")[1];
 
       // Verify the token
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      const decodedToken = await promisify(jwt.verify)(
+        token,
+        process.env.JWT_SECRET
+      );
 
       // get user with token.
-      req.user = await User.findById(decodedToken.id);
+      const user = await User.findById(decodedToken.id);
+
+      if (user) {
+        req.user = user;
+        res.locals.user = user;
+      }
 
       // pass to protected middleware
       next();
@@ -93,10 +108,19 @@ const protected = asyncHandler(async (req, res, next) => {
   } else if (req.cookies.jwt) {
     try {
       token = req.cookies.jwt;
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decodedToken.id);
+      const decodedToken = await promisify(jwt.verify)(
+        token,
+        process.env.JWT_SECRET
+      );
+      const user = await User.findById(decodedToken.id);
+      if (user) {
+        req.user = user;
+        res.locals.user = user;
+      }
+
       next();
     } catch (error) {
+      console.log(err);
       res.status(401);
       throw new Error("Must login to access");
     }
@@ -118,5 +142,6 @@ const facebookStrategy = require("passport-facebook");
 module.exports = {
   createNewUser,
   loginUser,
+  logOutUser,
   protected,
 };
