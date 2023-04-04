@@ -9,7 +9,23 @@
   }
 
   main {
+    @apply flex flex-col flex-1;
+  }
+
+  img {
+    @apply h-12 w-fit;
+  }
+
+  .post-form {
+    @apply border border-slate-100 rounded-xl flex flex-col p-2 h-auto gap-2;
+  }
+
+  .post-form#postContent {
     @apply flex-1;
+  }
+
+  .file-btn {
+    @apply flex gap-4;
   }
 
   /* header */
@@ -17,15 +33,19 @@
     @apply flex justify-between items-center h-12 border px-4;
   }
   .user-nav {
-    @apply flex flex-row-reverse items-center relative h-full;
+    @apply flex flex-row-reverse items-center h-full;
   }
 
   .profile-link {
-    @apply flex gap-2;
+    @apply flex gap-2 items-center;
+  }
+
+  .profile-link img {
+    @apply rounded-3xl;
   }
 
   .log-out {
-    @apply absolute right-0 bottom-0 border py-2 px-4 translate-y-[100%];
+    @apply border py-2 px-4;
   }
 
   .logo {
@@ -50,6 +70,32 @@
 
   .login-btn {
     @apply border rounded-md self-center px-4 py-2 font-semibold text-xl;
+  }
+
+  /* HOMEPAGE */
+
+  .home-page {
+    @apply p-6 flex flex-col gap-4 md:flex-row md:justify-center;
+  }
+
+  .posts {
+    @apply flex flex-col gap-2 flex-1 md:max-w-xl;
+  }
+
+  .post-card {
+    @apply border rounded-md p-2;
+  }
+
+  .post-info {
+    @apply flex justify-between items-end;
+  }
+
+  .allusers {
+    @apply flex flex-col gap-4 p-2 h-auto justify-start;
+  }
+
+  .users-container {
+    @apply grid grid-cols-2 gap-4 md:grid-cols-3;
   }
 
   /* Footer */

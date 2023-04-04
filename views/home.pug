@@ -1,0 +1,17 @@
+extends base
+include _postCard
+include _userCard
+include _postForm
+
+block content 
+  .home-page 
+    .posts 
+      +postForm
+      each post in posts 
+        +postCard(post)
+    .allusers
+      h2.make-friends Make a new friend
+      hr
+      .users-container
+        each profile in users  
+          +userCard(profile)

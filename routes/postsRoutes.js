@@ -10,7 +10,7 @@ router.use(authController.protected);
 router
   .route("/")
   .get(postController.getPosts)
-  .post(postController.createNewPost);
+  .post(postController.setId, postController.createNewPost);
 
 router
   .route("/:id")

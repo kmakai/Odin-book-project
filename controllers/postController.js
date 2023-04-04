@@ -2,6 +2,10 @@ const controllerFactory = require("../controllers/controllerFactory");
 const asyncHandler = require("express-async-handler");
 
 const Post = require("../models/postModel");
+const setId = (req, res, next) => {
+  if (!req.body.user) req.body.user = req.user.id;
+  next();
+};
 
 const getPosts = controllerFactory.getAll(Post);
 const getAPost = controllerFactory.getOne(Post, { path: "comments" });
@@ -27,4 +31,5 @@ module.exports = {
   updatePost,
   deletePost,
   getUserPosts,
+  setId,
 };

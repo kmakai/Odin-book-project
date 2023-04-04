@@ -1,0 +1,13 @@
+mixin postCard(post)
+  .post-card 
+    if post.imgUrl
+      img(src=`${post.imgUrl}`, alt="")
+    p.post-content= post.postContent
+    hr.line
+    .post-info 
+      a.user-link(href="#")
+        img(src=`images/default.jpg`, alt="user")
+        p= post.user.name
+      p.post-likes= `${post.likes.length} likes`
+    .comments 
+      p.post-comments

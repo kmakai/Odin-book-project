@@ -23,7 +23,6 @@ const getOne = (Model, popOptions) =>
 
 const createOne = (Model) =>
   asyncHandler(async (req, res, next) => {
-    req.body.user && "6424adf4dd7744621169eddc";
     const doc = await Model.create(req.body);
     res
       .status(200)
