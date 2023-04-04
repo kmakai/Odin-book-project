@@ -558,8 +558,10 @@ function hmrAccept(bundle, id) {
 
 },{}],"8h7jx":[function(require,module,exports) {
 var _loginhandlers = require("./loginhandlers");
+var _posthandlers = require("./posthandlers");
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
+const postForm = document.querySelector(".post-form");
 loginForm && loginForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     const email = document.getElementById("email").value;
@@ -567,8 +569,17 @@ loginForm && loginForm.addEventListener("submit", (e)=>{
     (0, _loginhandlers.login)(email, password);
 });
 logoutBtn && logoutBtn.addEventListener("click", (0, _loginhandlers.logout));
+postForm && postForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const postContent = document.getElementById("postContent").value;
+    const user = document.getElementById("user").value;
+    (0, _posthandlers.submitPost)({
+        postContent,
+        user
+    });
+});
 
-},{"./loginhandlers":"lFxua"}],"lFxua":[function(require,module,exports) {
+},{"./loginhandlers":"lFxua","./posthandlers":"2r7KE"}],"lFxua":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login);
@@ -4746,6 +4757,21 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
 });
 exports.default = HttpStatusCode;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2r7KE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "submitPost", ()=>submitPost);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const baseUrl = "api/v1";
+const submitPost = async (postObj)=>{
+    const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
+    console.log(res.data);
+    if (res.data.status === "success") window.setTimeout(()=>{
+        location.assign(location.href);
+    }, 1000);
+};
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
 
 //# sourceMappingURL=index.js.map

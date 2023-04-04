@@ -1,0 +1,29 @@
+extends base
+include _postForm
+include _postCard
+
+block content 
+  .profile-page 
+    .user-info 
+      img(src="images/default.jpg", alt="user image")
+      p.user-name= profile.name 
+      p.user-email= profile.email
+    .friends
+      p.friends-title Friends
+      each friend in profile.friends 
+        .user-card 
+          img(src=`images/default.jpg`, alt="user")
+          p= friend.name
+    .posts 
+      p.posts-title What's on your mind today?
+      +postForm
+      each post in posts 
+        +postCard(post)
+    
+    .requests
+        p.requests-title Pending Requests
+        each friend in profile.friendRequests 
+          .user-card 
+            img(src=`images/default.jpg`, alt="user")
+            p= friend.name
+            button Accept

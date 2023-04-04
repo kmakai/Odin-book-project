@@ -35,7 +35,23 @@ const renderHome = asyncHandler(async (req, res, next) => {
   res.status(200).render("home", { posts, users });
 });
 
+const renderProfile = asyncHandler(async (req, res, next) => {
+  const profile = await User.findById(req.user.id)
+    .populate("friends friendRequests")
+    .select("-password");
+
+  const posts = await Post.find({ user: req.user.id }).sort({ createdAt: -1 });
+  if (!profile) {
+    res.status(401);
+    throw new Error("There was an error getting the Profile");
+  }
+  console.log(profile);
+
+  res.status(200).render("profile", { profile, posts });
+});
+
 module.exports = {
   renderLogin,
   renderHome,
+  renderProfile,
 };

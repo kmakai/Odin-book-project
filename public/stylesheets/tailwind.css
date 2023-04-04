@@ -83,7 +83,7 @@
   }
 
   .post-card {
-    @apply border rounded-md p-2;
+    @apply border flex flex-col rounded-md p-2 gap-4;
   }
 
   .post-info {
@@ -96,6 +96,26 @@
 
   .users-container {
     @apply grid grid-cols-2 gap-4 md:grid-cols-3;
+  }
+
+  /* Profile page */
+  .profile-page {
+    @apply flex flex-col h-full m-[5%] gap-3 md:grid md:grid-cols-4 md:grid-rows-6 md:gap-4 md:m-8;
+  }
+
+  .user-info {
+    @apply border rounded-md p-4 hidden md:flex md:flex-col md:gap-4 md:self-start;
+  }
+  .friends {
+    @apply border rounded-md p-2 hidden md:block;
+  }
+
+  .profile-page .posts {
+    @apply border p-2 md:col-start-2 md:col-end-4 md:row-start-1 md:row-span-full md:max-w-full;
+  }
+
+  .requests {
+    @apply rounded-md border p-2 md:col-start-4 md:col-end-5;
   }
 
   /* Footer */
