@@ -1,5 +1,12 @@
-mixin userCard(profile)
+mixin userCard(profile, opt)
   .user-card 
     img(src=`images/default.jpg`, alt="user")
     p= profile.name
-    button Request
+    if opt === "req"
+      form.req-form
+        input(type="hidden", name="profile-id" id="profile-id" value=`${profile.id}`)
+        button(class="req-btn") Request
+    else 
+      form.accept-form
+        input(type="hidden", name="profile-id" id="profile-id" value=`${profile.id}`)
+        button(class="res-btn") Accept

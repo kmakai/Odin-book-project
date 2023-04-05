@@ -7,7 +7,7 @@ header.header
     if user 
       a.profile-link(href='/my-profile')
         img.profile-img(src="images/default.jpg", alt="user image")
-        span.user-name= user.name
+        span.user-name= user.name.split(" ")[0]
     else 
       a.sign-up(href="#") Sign up
 

@@ -1,0 +1,5 @@
+mixin commentCard(comment)
+  .comment-card 
+    p.comment-text= comment.text 
+    - const date = new Date(comment.createdAt)
+    p.commentor= `by ${comment.user.name.split(" ")[0]} at ${date.toLocaleString()}`

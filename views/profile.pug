@@ -1,6 +1,7 @@
 extends base
 include _postForm
 include _postCard
+include _userCard
 
 block content 
   .profile-page 
@@ -8,22 +9,19 @@ block content
       img(src="images/default.jpg", alt="user image")
       p.user-name= profile.name 
       p.user-email= profile.email
-    .friends
-      p.friends-title Friends
-      each friend in profile.friends 
-        .user-card 
-          img(src=`images/default.jpg`, alt="user")
-          p= friend.name
+    
     .posts 
-      p.posts-title What's on your mind today?
       +postForm
       each post in posts 
         +postCard(post)
-    
-    .requests
-        p.requests-title Pending Requests
-        each friend in profile.friendRequests 
+    .friends-requests    
+      .friends
+        p.friends-title Friends
+        each friend in profile.friends 
           .user-card 
             img(src=`images/default.jpg`, alt="user")
             p= friend.name
-            button Accept
+      .requests
+          p.requests-title Pending Requests
+          each friend in profile.friendRequests 
+            +userCard(friend)

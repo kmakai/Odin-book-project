@@ -1,9 +1,10 @@
 import { login, logout } from "./loginhandlers";
-import { submitPost } from "./posthandlers";
+import { submitPost, submitComment, friendHandler } from "./posthandlers";
 
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
 const postForm = document.querySelector(".post-form");
+const commentForms = document.querySelectorAll(".comment-form");
 
 loginForm &&
   loginForm.addEventListener("submit", (e) => {
@@ -23,3 +24,38 @@ postForm &&
     const user = document.getElementById("user").value;
     submitPost({ postContent, user });
   });
+
+commentForms &&
+  commentForms.forEach((form) =>
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const post = e.target.querySelector("#postid").value;
+      const user = e.target.querySelector("#userid").value;
+      const commentText = e.target.querySelector("#comment-text").value;
+      submitComment({ post, user, text: commentText });
+      // console.log(e.target.querySelector("#userid").value);
+    })
+  );
+
+// friends request handlers
+const acceptForms = document.querySelectorAll(".accept-form");
+
+acceptForms &&
+  acceptForms.forEach((acceptForm) =>
+    acceptForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = e.target.querySelector("#profile-id").value;
+      friendHandler(id, "accept");
+    })
+  );
+
+const reqForms = document.querySelectorAll(".req-form");
+
+reqForms &&
+  reqForms.forEach((reqForm) =>
+    reqForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = e.target.querySelector("#profile-id").value;
+      friendHandler(id, "request");
+    })
+  );

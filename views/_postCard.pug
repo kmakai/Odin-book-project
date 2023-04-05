@@ -1,3 +1,5 @@
+include _commentForm
+include _commentCard
 mixin postCard(post)
   .post-card 
     if post.imgUrl
@@ -10,4 +12,6 @@ mixin postCard(post)
         p= post.user.name
       p.post-likes= `${post.likes.length} likes`
     .comments 
-      p.post-comments
+      +commentForm(post)
+      each c in post.comments 
+       +commentCard(c)

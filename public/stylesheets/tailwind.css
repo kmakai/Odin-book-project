@@ -17,7 +17,7 @@
   }
 
   .post-form {
-    @apply border border-slate-100 rounded-xl flex flex-col p-2 h-auto gap-2;
+    @apply border border-slate-200 rounded-sm flex flex-col p-2 h-auto gap-2;
   }
 
   .post-form#postContent {
@@ -25,13 +25,35 @@
   }
 
   .file-btn {
-    @apply flex gap-4;
+    @apply flex gap-4 justify-between items-center;
+  }
+
+  .file-btn button,
+  .comment-form button {
+    @apply border border-blue-700 rounded-md px-4 py-1 text-xl font-bold text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+  }
+
+  .comment-form {
+    @apply flex flex-col gap-2;
+  }
+
+  #comment-text-area {
+    @apply border border-slate-400 rounded-sm p-2 focus:outline-none;
+  }
+
+  .comment-form button {
+    @apply self-end;
+  }
+
+  #postContent {
+    @apply border border-slate-400 rounded-md p-2 focus:outline-none  text-slate-500;
   }
 
   /* header */
   .header {
-    @apply flex justify-between items-center h-12 border px-4;
+    @apply flex justify-between items-center h-14 px-4 py-2 bg-blue-600 shadow-md;
   }
+
   .user-nav {
     @apply flex flex-row-reverse items-center h-full;
   }
@@ -40,16 +62,20 @@
     @apply flex gap-2 items-center;
   }
 
+  .profile-link .user-name {
+    @apply capitalize self-end text-xl;
+  }
+
   .profile-link img {
-    @apply rounded-3xl;
+    @apply rounded-3xl h-8;
   }
 
   .log-out {
-    @apply border py-2 px-4;
+    @apply border border-blue-700 p-2 font-semibold rounded-md text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
 
   .logo {
-    @apply text-2xl font-bold uppercase italic;
+    @apply text-base font-bold uppercase italic md:text-xl text-white;
   }
 
   .user-nav .sign-up {
@@ -75,7 +101,7 @@
   /* HOMEPAGE */
 
   .home-page {
-    @apply p-6 flex flex-col gap-4 md:flex-row md:justify-center;
+    @apply p-6 flex flex-col gap-4 md:flex-row md:justify-around md:p-12;
   }
 
   .posts {
@@ -83,7 +109,7 @@
   }
 
   .post-card {
-    @apply border flex flex-col rounded-md p-2 gap-4;
+    @apply border flex flex-col rounded-sm px-2 py-3 gap-4;
   }
 
   .post-info {
@@ -91,31 +117,52 @@
   }
 
   .allusers {
-    @apply flex flex-col gap-4 p-2 h-auto justify-start;
+    @apply flex flex-col gap-4 p-4 h-auto justify-start border self-start;
   }
 
   .users-container {
     @apply grid grid-cols-2 gap-4 md:grid-cols-3;
   }
 
+  .comments {
+    @apply flex flex-col gap-y-6;
+  }
+
+  .comment-card {
+    @apply border flex flex-col gap-y-2 p-2;
+  }
+
+  .comment-card .comment-text {
+    @apply text-slate-700;
+  }
+
+  .comment-card .commentor {
+    @apply text-sm text-slate-400 italic border-t;
+  }
+
   /* Profile page */
   .profile-page {
-    @apply flex flex-col h-full m-[5%] gap-3 md:grid md:grid-cols-4 md:grid-rows-6 md:gap-4 md:m-8;
+    @apply flex flex-col h-full m-[5%] gap-3 md:grid md:grid-cols-4 md:grid-rows-4 md:gap-4 md:m-8;
   }
 
   .user-info {
     @apply border rounded-md p-4 hidden md:flex md:flex-col md:gap-4 md:self-start;
   }
-  .friends {
-    @apply border rounded-md p-2 hidden md:block;
-  }
 
   .profile-page .posts {
-    @apply border p-2 md:col-start-2 md:col-end-4 md:row-start-1 md:row-span-full md:max-w-full;
+    @apply border p-2 md:col-start-2 md:col-end-4 md:row-start-1 md:row-span-full md:max-w-full md:self-start;
+  }
+
+  .friends-requests {
+    @apply md:flex md:flex-col md:gap-10;
+  }
+
+  .friends {
+    @apply border rounded-md p-2;
   }
 
   .requests {
-    @apply rounded-md border p-2 md:col-start-4 md:col-end-5;
+    @apply rounded-md border p-2;
   }
 
   /* Footer */

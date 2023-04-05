@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
+const Comment = require("../models/commentModel");
 
 // {
 //   asyncHandler(async (req, res, next) => {
@@ -13,7 +14,7 @@ const renderLogin = asyncHandler(async (req, res, next) => {
 });
 
 const renderHome = asyncHandler(async (req, res, next) => {
-  const posts = await Post.find({
+  let posts = await Post.find({
     user: { $in: [...req.user.friends, req.user.id] },
   })
     .sort({ createdAt: -1 })
@@ -21,13 +22,21 @@ const renderHome = asyncHandler(async (req, res, next) => {
       path: "user",
       select: "name photo",
     });
+  const postIds = posts.map((p) => p.id);
+  const comments = await Comment.find({ post: { $in: postIds } });
+
+  posts = posts.map((p) => {
+    p.comments = comments.filter((c) => c.post.toString() === p.id.toString());
+    return p;
+  });
 
   let users = await User.find({ _id: { $ne: req.user.id } });
 
   users = users.filter(
     (user) =>
       !req.user.friends.includes(user.id) &&
-      !req.user.friendRequests.includes(user.id)
+      !req.user.friendRequests.includes(user.id) &&
+      user.friendRequests.includes(req.user.id)
   );
   // console.log(users);
   // console.log(req.user.friends);
@@ -40,12 +49,19 @@ const renderProfile = asyncHandler(async (req, res, next) => {
     .populate("friends friendRequests")
     .select("-password");
 
-  const posts = await Post.find({ user: req.user.id }).sort({ createdAt: -1 });
+  let posts = await Post.find({ user: req.user.id }).sort({ createdAt: -1 });
   if (!profile) {
     res.status(401);
     throw new Error("There was an error getting the Profile");
   }
-  console.log(profile);
+
+  const postIds = posts.map((p) => p.id);
+  const comments = await Comment.find({ post: { $in: postIds } });
+
+  posts = posts.map((p) => {
+    p.comments = comments.filter((c) => c.post.toString() === p.id.toString());
+    return p;
+  });
 
   res.status(200).render("profile", { profile, posts });
 });

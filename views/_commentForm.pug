@@ -1,0 +1,6 @@
+mixin commentForm(post)
+  form.comment-form 
+    input(type="hidden", name="postid" id='postid' value=`${post.id}`)
+    input(type="hidden", name="userid" id='userid' value=`${user.id}`)
+    textarea(name="comment-text", cols="20", rows="2" id="comment-text-area" placeholder="leave a comment")
+    button comment

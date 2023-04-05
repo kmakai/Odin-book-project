@@ -562,6 +562,7 @@ var _posthandlers = require("./posthandlers");
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
 const postForm = document.querySelector(".post-form");
+const commentForms = document.querySelectorAll(".comment-form");
 loginForm && loginForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     const email = document.getElementById("email").value;
@@ -578,6 +579,31 @@ postForm && postForm.addEventListener("submit", (e)=>{
         user
     });
 });
+commentForms && commentForms.forEach((form)=>form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const post = e.target.querySelector("#postid").value;
+        const user = e.target.querySelector("#userid").value;
+        const commentText = e.target.querySelector("#comment-text").value;
+        (0, _posthandlers.submitComment)({
+            post,
+            user,
+            text: commentText
+        });
+    // console.log(e.target.querySelector("#userid").value);
+    }));
+// friends request handlers
+const acceptForms = document.querySelectorAll(".accept-form");
+acceptForms && acceptForms.forEach((acceptForm)=>acceptForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const id = e.target.querySelector("#profile-id").value;
+        (0, _posthandlers.friendHandler)(id, "accept");
+    }));
+const reqForms = document.querySelectorAll(".req-form");
+reqForms && reqForms.forEach((reqForm)=>reqForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const id = e.target.querySelector("#profile-id").value;
+        (0, _posthandlers.friendHandler)(id, "request");
+    }));
 
 },{"./loginhandlers":"lFxua","./posthandlers":"2r7KE"}],"lFxua":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4761,11 +4787,27 @@ exports.default = HttpStatusCode;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "submitPost", ()=>submitPost);
+parcelHelpers.export(exports, "submitComment", ()=>submitComment);
+parcelHelpers.export(exports, "friendHandler", ()=>friendHandler);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "api/v1";
 const submitPost = async (postObj)=>{
     const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
+    console.log(res.data);
+    if (res.data.status === "success") window.setTimeout(()=>{
+        location.assign(location.href);
+    }, 1000);
+};
+const submitComment = async (commentObj)=>{
+    const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
+    console.log(res.data);
+    if (res.data.status === "success") window.setTimeout(()=>{
+        location.assign(location.href);
+    }, 1000);
+};
+const friendHandler = async (id, request)=>{
+    const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
     console.log(res.data);
     if (res.data.status === "success") window.setTimeout(()=>{
         location.assign(location.href);
