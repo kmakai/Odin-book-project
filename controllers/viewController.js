@@ -36,7 +36,7 @@ const renderHome = asyncHandler(async (req, res, next) => {
     (user) =>
       !req.user.friends.includes(user.id) &&
       !req.user.friendRequests.includes(user.id) &&
-      user.friendRequests.includes(req.user.id)
+      !user.friendRequests.includes(req.user.id)
   );
   // console.log(users);
   // console.log(req.user.friends);
@@ -45,11 +45,13 @@ const renderHome = asyncHandler(async (req, res, next) => {
 });
 
 const renderProfile = asyncHandler(async (req, res, next) => {
-  const profile = await User.findById(req.user.id)
+  let id = req.params.userId ? req.params.userId : req.user.id;
+  console.log(req.params);
+  const profile = await User.findById(id)
     .populate("friends friendRequests")
     .select("-password");
 
-  let posts = await Post.find({ user: req.user.id }).sort({ createdAt: -1 });
+  let posts = await Post.find({ user: id }).sort({ createdAt: -1 });
   if (!profile) {
     res.status(401);
     throw new Error("There was an error getting the Profile");
@@ -63,7 +65,10 @@ const renderProfile = asyncHandler(async (req, res, next) => {
     return p;
   });
 
-  res.status(200).render("profile", { profile, posts });
+  res.status(200).render(`${req.params.userId ? "userProfile" : "profile"}`, {
+    profile,
+    posts,
+  });
 });
 
 module.exports = {

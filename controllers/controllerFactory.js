@@ -23,6 +23,7 @@ const getOne = (Model, popOptions) =>
 
 const createOne = (Model) =>
   asyncHandler(async (req, res, next) => {
+    console.log(req.body);
     const doc = await Model.create(req.body);
     res
       .status(200)

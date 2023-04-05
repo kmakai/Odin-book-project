@@ -49,6 +49,14 @@
     @apply border border-slate-400 rounded-md p-2 focus:outline-none  text-slate-500;
   }
 
+  .user-card a {
+    @apply p-2 flex flex-col items-center border;
+  }
+
+  .req-btn,
+  .res-btn {
+    @apply border border-blue-500 px-2 rounded-sm text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+  }
   /* header */
   .header {
     @apply flex justify-between items-center h-14 px-4 py-2 bg-blue-600 shadow-md;
@@ -63,7 +71,7 @@
   }
 
   .profile-link .user-name {
-    @apply capitalize self-end text-xl;
+    @apply capitalize self-end text-xl text-white;
   }
 
   .profile-link img {
@@ -84,8 +92,21 @@
 
   /* Login */
   .loginpage {
-    @apply h-full flex flex-col justify-center;
+    @apply h-full flex flex-col justify-center items-center gap-4;
   }
+
+  .loginpage .register {
+    @apply flex flex-col gap-4 items-center;
+  }
+
+  .loginpage .register .or {
+    @apply text-slate-500 font-bold;
+  }
+
+  .register-btn {
+    @apply border rounded-md  border-blue-400 self-center px-4 py-2 font-semibold text-xl hover:bg-blue-500  text-blue-500 hover:text-white;
+  }
+
   .loginform {
     @apply flex flex-col border rounded-lg shadow-md items-stretch p-10 gap-4 mx-auto;
   }
@@ -95,7 +116,7 @@
   }
 
   .login-btn {
-    @apply border rounded-md self-center px-4 py-2 font-semibold text-xl;
+    @apply border rounded-md  border-blue-700 self-center px-4 py-2 font-semibold text-xl text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
 
   /* HOMEPAGE */
@@ -137,7 +158,7 @@
   }
 
   .comment-card .commentor {
-    @apply text-sm text-slate-400 italic border-t;
+    @apply text-sm text-slate-500 italic border-t;
   }
 
   /* Profile page */
@@ -157,8 +178,13 @@
     @apply md:flex md:flex-col md:gap-10;
   }
 
-  .friends {
-    @apply border rounded-md p-2;
+  .friends,
+  .requests {
+    @apply border rounded-md p-2 grid grid-cols-2 gap-2 lg:grid-cols-3;
+  }
+  .friends-title,
+  .requests-title {
+    @apply col-span-full;
   }
 
   .requests {

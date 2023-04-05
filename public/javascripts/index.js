@@ -31,7 +31,7 @@ commentForms &&
       e.preventDefault();
       const post = e.target.querySelector("#postid").value;
       const user = e.target.querySelector("#userid").value;
-      const commentText = e.target.querySelector("#comment-text").value;
+      const commentText = e.target.querySelector("#comment-text-area").value;
       submitComment({ post, user, text: commentText });
       // console.log(e.target.querySelector("#userid").value);
     })

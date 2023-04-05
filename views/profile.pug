@@ -9,19 +9,24 @@ block content
       img(src="images/default.jpg", alt="user image")
       p.user-name= profile.name 
       p.user-email= profile.email
+      .about-me 
+        span About Me 
+        p ipsum dolor sit amet, consectetur adipisicing elit.
     
     .posts 
       +postForm
       each post in posts 
         +postCard(post)
+        
     .friends-requests    
       .friends
         p.friends-title Friends
         each friend in profile.friends 
-          .user-card 
-            img(src=`images/default.jpg`, alt="user")
-            p= friend.name
+          .user-card
+            a(href=`${friend.id}/profile`)  
+              img(src=`images/default.jpg`, alt="user")
+              p= friend.name
       .requests
-          p.requests-title Pending Requests
-          each friend in profile.friendRequests 
-            +userCard(friend)
+        p.requests-title Pending Requests
+        each friend in profile.friendRequests 
+          +userCard(friend)

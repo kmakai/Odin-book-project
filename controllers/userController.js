@@ -48,7 +48,10 @@ const acceptFriend = asyncHandler(async (req, res, next) => {
     (id) => id.toString() !== requester.id.toString()
   );
 
+  requester.friends.push(user.id);
+
   await user.save();
+  await requester.save();
 
   res.status(200).json({
     status: "success",

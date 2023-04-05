@@ -583,7 +583,7 @@ commentForms && commentForms.forEach((form)=>form.addEventListener("submit", (e)
         e.preventDefault();
         const post = e.target.querySelector("#postid").value;
         const user = e.target.querySelector("#userid").value;
-        const commentText = e.target.querySelector("#comment-text").value;
+        const commentText = e.target.querySelector("#comment-text-area").value;
         (0, _posthandlers.submitComment)({
             post,
             user,
@@ -612,7 +612,7 @@ parcelHelpers.export(exports, "login", ()=>login);
 parcelHelpers.export(exports, "logout", ()=>logout);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const baseUrl = "api/v1";
+const baseUrl = "/api/v1";
 const login = async (email, password)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/login", {
@@ -4791,7 +4791,7 @@ parcelHelpers.export(exports, "submitComment", ()=>submitComment);
 parcelHelpers.export(exports, "friendHandler", ()=>friendHandler);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const baseUrl = "api/v1";
+const baseUrl = "/api/v1";
 const submitPost = async (postObj)=>{
     const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
     console.log(res.data);
@@ -4800,6 +4800,7 @@ const submitPost = async (postObj)=>{
     }, 1000);
 };
 const submitComment = async (commentObj)=>{
+    console.log(commentObj);
     const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
     console.log(res.data);
     if (res.data.status === "success") window.setTimeout(()=>{
@@ -4807,11 +4808,15 @@ const submitComment = async (commentObj)=>{
     }, 1000);
 };
 const friendHandler = async (id, request)=>{
-    const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
-    console.log(res.data);
-    if (res.data.status === "success") window.setTimeout(()=>{
-        location.assign(location.href);
-    }, 1000);
+    try {
+        const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
+        console.log(res.data);
+        if (res.data.status === "success") window.setTimeout(()=>{
+            location.assign(location.href);
+        }, 1000);
+    } catch (err) {
+        console.log(err.response.data);
+    }
 };
 
 },{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "api/v1";
+const baseUrl = "/api/v1";
 
 export const login = async (email, password) => {
   try {

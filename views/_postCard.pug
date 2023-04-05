@@ -8,7 +8,7 @@ mixin postCard(post)
     hr.line
     .post-info 
       a.user-link(href="#")
-        img(src=`images/default.jpg`, alt="user")
+        img(src=`/images/default.jpg`, alt="user")
         p= post.user.name
       p.post-likes= `${post.likes.length} likes`
     .comments 

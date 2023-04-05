@@ -2,4 +2,4 @@ mixin commentCard(comment)
   .comment-card 
     p.comment-text= comment.text 
     - const date = new Date(comment.createdAt)
-    p.commentor= `by ${comment.user.name.split(" ")[0]} at ${date.toLocaleString()}`
+    p.commentor= `${comment.user.name} - ${new Intl.DateTimeFormat('en-US',{month: 'short', day: "numeric", year: "numeric"}).format(date)}`

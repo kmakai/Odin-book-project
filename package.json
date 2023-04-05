@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "tw": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css --watch",
-    "viewdev": "concurrently \"npm:dev\" \"npm:tw\"",
+    "viewdev": "concurrently \"npm:dev\" \"npm:tw\" \"npm:pjs\"",
     "pjs": "parcel watch ./public/javascripts/index.js --dist-dir ./public/js/"
   },
   "dependencies": {

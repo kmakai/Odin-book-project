@@ -11,5 +11,10 @@ router.get(
   authController.protected,
   viewController.renderProfile
 );
+router.get(
+  "/:userId/profile",
+  authController.protected,
+  viewController.renderProfile
+);
 
 module.exports = router;
