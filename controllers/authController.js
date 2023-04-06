@@ -34,6 +34,9 @@ const createNewUser = asyncHandler(async (req, res, next) => {
     password: hashedPassword,
   });
 
+  let token = generateToken(user._id);
+  res.cookie("jwt", token);
+
   res.status(201).json({
     status: "success",
     message: " User Created",
@@ -41,7 +44,7 @@ const createNewUser = asyncHandler(async (req, res, next) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
+      token,
     },
   });
 });
@@ -138,6 +141,7 @@ const protected = asyncHandler(async (req, res, next) => {
 /////////////////////////////// PASSPORT FACEBOOK AUTH
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook");
+const { token } = require("morgan");
 
 module.exports = {
   createNewUser,

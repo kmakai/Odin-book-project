@@ -13,6 +13,10 @@ const renderLogin = asyncHandler(async (req, res, next) => {
   res.status(200).render("login");
 });
 
+const renderRegister = asyncHandler(async (req, res, next) => {
+  res.status(200).render("register", { title: "Registration" });
+});
+
 const renderHome = asyncHandler(async (req, res, next) => {
   let posts = await Post.find({
     user: { $in: [...req.user.friends, req.user.id] },
@@ -75,4 +79,5 @@ module.exports = {
   renderLogin,
   renderHome,
   renderProfile,
+  renderRegister,
 };

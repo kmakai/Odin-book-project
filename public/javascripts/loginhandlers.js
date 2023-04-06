@@ -22,3 +22,14 @@ export const logout = async () => {
     console.log(err.response.data);
   }
 };
+
+export const registerUser = async (userObj) => {
+  try {
+    const res = await axios.post(baseUrl + "/users/register", userObj);
+    console.log(res.data);
+
+    if (res.data.status === "success") location.assign("/");
+  } catch (err) {
+    console.log(err?.response?.data);
+  }
+};

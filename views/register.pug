@@ -1,0 +1,15 @@
+extends base
+
+block content
+  .register-page
+    form.register-form
+      h2.title= title 
+      input(type="text", name="name" id="name" placeholder="John Doe" required)
+      input(type="email", name="email" id="email" placeholder="john@example.com" required)
+      input(type="password", name="password" id="password" placeholder="password" required)
+      input(type="password", name="passwordconfirm" id="passwordconfirm" placeholder=" confirim password" required)
+      button submit
+
+    .or-login
+      p.or - or -
+      a(href="/login").register-btn log in

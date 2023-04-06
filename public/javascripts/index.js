@@ -1,10 +1,24 @@
-import { login, logout } from "./loginhandlers";
+import { login, logout, registerUser } from "./loginhandlers";
 import { submitPost, submitComment, friendHandler } from "./posthandlers";
 
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
 const postForm = document.querySelector(".post-form");
 const commentForms = document.querySelectorAll(".comment-form");
+const registerForm = document.querySelector(".register-form");
+
+registerForm &&
+  registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("passwordconfirm").value;
+
+    if (password !== passwordConfirm) return alert("password need confirm");
+
+    registerUser({ name, email, password, passwordConfirm });
+  });
 
 loginForm &&
   loginForm.addEventListener("submit", (e) => {

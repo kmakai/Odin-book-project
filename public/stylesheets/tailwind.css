@@ -90,6 +90,30 @@
     @apply font-bold text-xl;
   }
 
+  /* Register */
+  .register-page {
+    @apply h-full flex flex-col items-center;
+  }
+
+  .register-form {
+    @apply border shadow-lg p-4 rounded-xl flex flex-col items-center gap-4 mt-8;
+  }
+
+  .register-form input {
+    @apply focus:outline-none border bottom-2 p-2 rounded-md flex items-center;
+  }
+
+  .register-form button {
+    @apply border rounded-md  border-blue-700 self-center px-4 py-2 font-semibold text-xl text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+  }
+
+  .or-login {
+    @apply flex flex-col gap-4 items-center mt-4;
+  }
+  .or-login .or {
+    @apply text-slate-500 font-bold;
+  }
+
   /* Login */
   .loginpage {
     @apply h-full flex flex-col justify-center items-center gap-4;
@@ -193,7 +217,7 @@
 
   /* Footer */
   .footer {
-    @apply p-3 bg-slate-400 flex flex-col items-center;
+    @apply p-3 bg-blue-600 flex flex-col items-center md:flex-row md:justify-between shadow-2xl;
   }
 
   .footer .logo {
@@ -201,6 +225,6 @@
   }
 
   .footer-nav {
-    @apply flex gap-4;
+    @apply flex gap-2 flex-col mb-2 md:flex-row md:mb-0 text-white;
   }
 }
