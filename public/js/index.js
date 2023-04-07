@@ -564,6 +564,7 @@ const logoutBtn = document.querySelector(".log-out");
 const postForm = document.querySelector(".post-form");
 const commentForms = document.querySelectorAll(".comment-form");
 const registerForm = document.querySelector(".register-form");
+const likeForms = document.querySelectorAll(".likes-form");
 registerForm && registerForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     const name = document.getElementById("name").value;
@@ -592,6 +593,20 @@ postForm && postForm.addEventListener("submit", (e)=>{
     (0, _posthandlers.submitPost)({
         postContent,
         user
+    });
+});
+console.log(likeForms);
+likeForms && likeForms.forEach((form)=>{
+    form.addEventListener("click", (e)=>{
+        console.log(e.target.closest(".likes-form"));
+        let target = e.target.closest(".likes-form");
+        // e.preventDefault();
+        const postId = target.querySelector("#postid").value;
+        const userId = target.querySelector("#userid").value;
+        (0, _posthandlers.postLikes)({
+            postId,
+            userId
+        });
     });
 });
 commentForms && commentForms.forEach((form)=>form.addEventListener("submit", (e)=>{
@@ -4812,6 +4827,7 @@ exports.default = HttpStatusCode;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "submitPost", ()=>submitPost);
+parcelHelpers.export(exports, "postLikes", ()=>postLikes);
 parcelHelpers.export(exports, "submitComment", ()=>submitComment);
 parcelHelpers.export(exports, "friendHandler", ()=>friendHandler);
 var _axios = require("axios");
@@ -4819,26 +4835,22 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "/api/v1";
 const submitPost = async (postObj)=>{
     const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
-    console.log(res.data);
-    if (res.data.status === "success") window.setTimeout(()=>{
-        location.assign(location.href);
-    }, 1000);
+    if (res.data.status === "success") location.reload();
+};
+const postLikes = async (postObj)=>{
+    const res = await (0, _axiosDefault.default).patch(baseUrl + "/posts/likes", postObj);
+    if (res.data.status === "success") location.reload();
 };
 const submitComment = async (commentObj)=>{
     console.log(commentObj);
     const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
-    console.log(res.data);
-    if (res.data.status === "success") window.setTimeout(()=>{
-        location.assign(location.href);
-    }, 1000);
+    if (res.data.status === "success") location.reload();
 };
 const friendHandler = async (id, request)=>{
     try {
         const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
         console.log(res.data);
-        if (res.data.status === "success") window.setTimeout(()=>{
-            location.assign(location.href);
-        }, 1000);
+        if (res.data.status === "success") location.reload();
     } catch (err) {
         console.log(err.response.data);
     }

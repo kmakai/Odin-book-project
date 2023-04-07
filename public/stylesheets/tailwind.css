@@ -52,10 +52,13 @@
   .user-card a {
     @apply p-2 flex flex-col items-center border;
   }
+  .user-card .req-form {
+    @apply flex justify-center;
+  }
 
   .req-btn,
   .res-btn {
-    @apply border border-blue-500 px-2 rounded-sm text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+    @apply border border-blue-700 px-2 mt-2 rounded-md text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
   /* header */
   .header {
@@ -161,12 +164,25 @@
     @apply flex justify-between items-end;
   }
 
+  /* .likes-form {
+    @apply;
+  } */
+  .likes-form button {
+    @apply flex w-full items-end gap-2 p-2;
+  }
+  .likes-form button i {
+    @apply text-red-500 text-xl;
+  }
+  .likes-form button .post-likes {
+    @apply text-xl text-slate-500;
+  }
+
   .allusers {
     @apply flex flex-col gap-4 p-4 h-auto justify-start border self-start;
   }
 
   .users-container {
-    @apply grid grid-cols-2 gap-4 md:grid-cols-3;
+    @apply grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3;
   }
 
   .comments {

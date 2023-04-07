@@ -12,6 +12,8 @@ router
   .get(postController.getPosts)
   .post(postController.setId, postController.createNewPost);
 
+router.patch("/likes", postController.likePost);
+
 router
   .route("/:id")
   .get(postController.getAPost)

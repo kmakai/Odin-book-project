@@ -10,7 +10,16 @@ mixin postCard(post)
       a.user-link(href="#")
         img(src=`/images/default.jpg`, alt="user")
         p= post.user.name
-      p.post-likes= `${post.likes.length} likes`
+      .likes-form
+        input(type="hidden", name="userid" id='userid' value=`${user.id}`)
+        input(type="hidden", name="postid" id='postid' value=`${post.id}`)
+        button 
+          - const liked = post.likes.includes(user.id)
+          if liked
+            i(class="fa fa-heart" aria-hidden="true")
+          else 
+            i(class="fa fa-heart-o" aria-hidden="true")
+          p.post-likes= `${post.likes.length}`
     .comments 
       +commentForm(post)
       each c in post.comments 

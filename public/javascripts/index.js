@@ -1,11 +1,17 @@
 import { login, logout, registerUser } from "./loginhandlers";
-import { submitPost, submitComment, friendHandler } from "./posthandlers";
+import {
+  submitPost,
+  submitComment,
+  friendHandler,
+  postLikes,
+} from "./posthandlers";
 
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
 const postForm = document.querySelector(".post-form");
 const commentForms = document.querySelectorAll(".comment-form");
 const registerForm = document.querySelector(".register-form");
+const likeForms = document.querySelectorAll(".likes-form");
 
 registerForm &&
   registerForm.addEventListener("submit", (e) => {
@@ -37,6 +43,20 @@ postForm &&
     const postContent = document.getElementById("postContent").value;
     const user = document.getElementById("user").value;
     submitPost({ postContent, user });
+  });
+
+console.log(likeForms);
+
+likeForms &&
+  likeForms.forEach((form) => {
+    form.addEventListener("click", (e) => {
+      console.log(e.target.closest(".likes-form"));
+      let target = e.target.closest(".likes-form");
+      // e.preventDefault();
+      const postId = target.querySelector("#postid").value;
+      const userId = target.querySelector("#userid").value;
+      postLikes({ postId, userId });
+    });
   });
 
 commentForms &&

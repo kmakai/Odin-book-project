@@ -24,6 +24,24 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
   res.status(200).json({ status: "success", results: docs.length, data: docs });
 });
 
+const likePost = asyncHandler(async (req, res, next) => {
+  let message;
+  const { postId, userId } = req.body;
+  const post = await Post.findById(postId);
+
+  if (post.likes.includes(userId)) {
+    post.likes = post.likes.filter((id) => id.toString() !== userId);
+    message = "unliked";
+  } else {
+    post.likes.push(userId);
+    message = "liked";
+  }
+
+  await post.save();
+
+  res.status(200).json({ status: "success", message });
+});
+
 module.exports = {
   getPosts,
   getAPost,
@@ -32,4 +50,5 @@ module.exports = {
   deletePost,
   getUserPosts,
   setId,
+  likePost,
 };

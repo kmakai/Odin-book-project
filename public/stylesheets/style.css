@@ -491,13 +491,18 @@ video {
   border-width: 1px;
   padding: 0.5rem;
 }
+  .user-card .req-form {
+  display: flex;
+  justify-content: center;
+}
 
   .req-btn,
   .res-btn {
-  border-radius: 0.125rem;
+  margin-top: 0.5rem;
+  border-radius: 0.375rem;
   border-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+  border-color: rgb(29 78 216 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
   padding-left: 0.5rem;
@@ -820,6 +825,29 @@ video {
   justify-content: space-between;
 }
 
+  /* .likes-form {
+    @apply;
+  } */
+  .likes-form button {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+  .likes-form button i {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+  .likes-form button .post-likes {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity));
+}
+
   .allusers {
   display: flex;
   height: auto;
@@ -838,6 +866,13 @@ video {
 }
 
   @media (min-width: 768px) {
+
+  .users-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+  @media (min-width: 1024px) {
 
   .users-container {
     grid-template-columns: repeat(3, minmax(0, 1fr));
