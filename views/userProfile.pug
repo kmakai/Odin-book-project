@@ -6,7 +6,7 @@ include _userCard
 block content 
   .profile-page 
     .user-info 
-      img(src="/images/default.jpg", alt="user image")
+      img(src=profile.photo ? profile.photo : "/images/default.jpg", alt="user image")
       p.user-name= profile.name 
       p.user-email= profile.email
       if user.friendRequests.includes(profile.id)
@@ -31,5 +31,5 @@ block content
         each friend in profile.friends 
           .user-card
             a(href=`/${friend.id}/profile`)  
-              img(src=`/images/default.jpg`, alt="user")
+              img(src= friend.photo ? friend.photo : `/images/default.jpg`, alt="user")
               p= friend.name

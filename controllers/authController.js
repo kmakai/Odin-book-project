@@ -72,6 +72,28 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+const loginGuest = asyncHandler(async (req, res, next) => {
+  const guestLogins = [
+    "Lue73@hotmail.com",
+    "Selina56@yahoo.com",
+    "Isaac_Auer1@gmail.com",
+    "Laurel30@gmail.com",
+    "Jerrold49@hotmail.com",
+    "Duncan24@yahoo.com",
+    "Ebony.Oberbrunner42@hotmail.com",
+    "Corrine_Witting98@yahoo.com",
+    "Jenifer.Christiansen@hotmail.com",
+    "Joannie_Nicolas37@hotmail.com",
+  ];
+
+  const randomN = Math.floor(Math.random() * (9 - 0 + 1) + 0);
+  console.log(randomN);
+
+  req.body.email = guestLogins[randomN];
+  req.body.password = "pass1234";
+  next();
+});
+
 const logOutUser = asyncHandler(async (req, res, next) => {
   res.cookie("jwt", "", {
     expires: new Date(Date.now() + 10 * 1000),
@@ -148,4 +170,6 @@ module.exports = {
   loginUser,
   logOutUser,
   protected,
+  generateToken,
+  loginGuest,
 };

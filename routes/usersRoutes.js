@@ -8,6 +8,7 @@ const postController = require("../controllers/postController");
 router.post("/register", authController.createNewUser);
 router.post("/login", authController.loginUser);
 router.post("/logout", authController.logOutUser);
+router.post("/guest", authController.loginGuest, authController.loginUser);
 
 router.use(authController.protected);
 

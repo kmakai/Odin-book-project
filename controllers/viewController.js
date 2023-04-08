@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { generateToken } = require("../controllers/authController");
 
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
@@ -55,7 +56,10 @@ const renderProfile = asyncHandler(async (req, res, next) => {
     .populate("friends friendRequests")
     .select("-password");
 
-  let posts = await Post.find({ user: id }).sort({ createdAt: -1 });
+  let posts = await Post.find({ user: id }).sort({ createdAt: -1 }).populate({
+    path: "user",
+    select: "name photo",
+  });
   if (!profile) {
     res.status(401);
     throw new Error("There was an error getting the Profile");
@@ -69,7 +73,11 @@ const renderProfile = asyncHandler(async (req, res, next) => {
     return p;
   });
 
-  res.status(200).render(`${req.params.userId ? "userProfile" : "profile"}`, {
+  let render;
+  if (req.params.userId) render = "userProfile";
+  else render = "profile";
+  console.log(render);
+  res.status(200).render(render, {
     profile,
     posts,
   });

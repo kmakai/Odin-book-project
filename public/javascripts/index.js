@@ -1,4 +1,4 @@
-import { login, logout, registerUser } from "./loginhandlers";
+import { login, logout, registerUser, guestLogin } from "./loginhandlers";
 import {
   submitPost,
   submitComment,
@@ -8,6 +8,7 @@ import {
 
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
+const guestBtn = document.querySelector(".guest-btn");
 const postForm = document.querySelector(".post-form");
 const commentForms = document.querySelectorAll(".comment-form");
 const registerForm = document.querySelector(".register-form");
@@ -35,6 +36,8 @@ loginForm &&
     login(email, password);
   });
 
+guestBtn && guestBtn.addEventListener("click", guestLogin);
+
 logoutBtn && logoutBtn.addEventListener("click", logout);
 
 postForm &&
@@ -44,8 +47,6 @@ postForm &&
     const user = document.getElementById("user").value;
     submitPost({ postContent, user });
   });
-
-console.log(likeForms);
 
 likeForms &&
   likeForms.forEach((form) => {

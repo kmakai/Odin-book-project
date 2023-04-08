@@ -561,6 +561,7 @@ var _loginhandlers = require("./loginhandlers");
 var _posthandlers = require("./posthandlers");
 const loginForm = document.querySelector(".loginform");
 const logoutBtn = document.querySelector(".log-out");
+const guestBtn = document.querySelector(".guest-btn");
 const postForm = document.querySelector(".post-form");
 const commentForms = document.querySelectorAll(".comment-form");
 const registerForm = document.querySelector(".register-form");
@@ -585,6 +586,7 @@ loginForm && loginForm.addEventListener("submit", (e)=>{
     const password = document.getElementById("password").value;
     (0, _loginhandlers.login)(email, password);
 });
+guestBtn && guestBtn.addEventListener("click", (0, _loginhandlers.guestLogin));
 logoutBtn && logoutBtn.addEventListener("click", (0, _loginhandlers.logout));
 postForm && postForm.addEventListener("submit", (e)=>{
     e.preventDefault();
@@ -595,7 +597,6 @@ postForm && postForm.addEventListener("submit", (e)=>{
         user
     });
 });
-console.log(likeForms);
 likeForms && likeForms.forEach((form)=>{
     form.addEventListener("click", (e)=>{
         console.log(e.target.closest(".likes-form"));
@@ -639,6 +640,7 @@ reqForms && reqForms.forEach((reqForm)=>reqForm.addEventListener("submit", (e)=>
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login);
+parcelHelpers.export(exports, "guestLogin", ()=>guestLogin);
 parcelHelpers.export(exports, "logout", ()=>logout);
 parcelHelpers.export(exports, "registerUser", ()=>registerUser);
 var _axios = require("axios");
@@ -650,7 +652,14 @@ const login = async (email, password)=>{
             email,
             password
         });
-        console.log(res.data);
+        if (res.data.status === "success") location.assign("/");
+    } catch (err) {
+        console.log(err.response.data);
+    }
+};
+const guestLogin = async ()=>{
+    try {
+        const res = await (0, _axiosDefault.default).post(baseUrl + "/users/guest");
         if (res.data.status === "success") location.assign("/");
     } catch (err) {
         console.log(err.response.data);
@@ -659,7 +668,6 @@ const login = async (email, password)=>{
 const logout = async ()=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/logout");
-        console.log(res.data);
         if (res.data.status === "success") location.assign("/");
     } catch (err) {
         console.log(err.response.data);
@@ -668,7 +676,6 @@ const logout = async ()=>{
 const registerUser = async (userObj)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/register", userObj);
-        console.log(res.data);
         if (res.data.status === "success") location.assign("/");
     } catch (err) {
         console.log(err?.response?.data);

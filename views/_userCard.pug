@@ -1,7 +1,7 @@
 mixin userCard(profile, opt)
   .user-card
     a(href=`${profile.id}/profile`) 
-      img(src=`images/default.jpg`, alt="user")
+      img(src= profile.photo ? profile.photo : "/images/default.jpg", alt="user")
       p= profile.name
     if opt === "req"
       form.req-form
