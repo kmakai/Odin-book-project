@@ -98,7 +98,9 @@ const logOutUser = asyncHandler(async (req, res, next) => {
   res.cookie("jwt", "", {
     expires: new Date(Date.now() + 10 * 1000),
   });
-  res.status(200).json({ status: "success" });
+  res
+    .status(200)
+    .json({ status: "success", message: "successfully logged out" });
 });
 
 const protected = asyncHandler(async (req, res, next) => {

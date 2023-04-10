@@ -655,9 +655,13 @@ parcelHelpers.export(exports, "login", ()=>login);
 parcelHelpers.export(exports, "guestLogin", ()=>guestLogin);
 parcelHelpers.export(exports, "logout", ()=>logout);
 parcelHelpers.export(exports, "registerUser", ()=>registerUser);
+var _popup = require("./popup");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "/api/v1";
+const goHome = ()=>window.setTimeout(()=>{
+        location.assign("/");
+    }, 1000);
 const login = async (email, password)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/login", {
@@ -666,35 +670,41 @@ const login = async (email, password)=>{
         });
         if (res.data.status === "success") location.assign("/");
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const guestLogin = async ()=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/guest");
-        if (res.data.status === "success") location.assign("/");
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            goHome();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const logout = async ()=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/logout");
-        if (res.data.status === "success") location.assign("/");
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            goHome();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const registerUser = async (userObj)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/register", userObj);
-        if (res.data.status === "success") location.assign("/");
+        if (res.data.status === "success") (0, _popup.showSuccess)(res);
     } catch (err) {
-        console.log(err?.response?.data);
+        (0, _popup.showErr)(err);
     }
 };
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jo6P5":[function(require,module,exports) {
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./popup":"9cLHk"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -4842,6 +4852,27 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
 });
 exports.default = HttpStatusCode;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9cLHk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "showErr", ()=>showErr);
+parcelHelpers.export(exports, "showSuccess", ()=>showSuccess);
+const showErr = (err)=>{
+    return Toastify({
+        text: err.response.data.message,
+        duration: 3000,
+        style: {
+            background: "linear-gradient(to right, #ef4444, #f87171)"
+        }
+    }).showToast();
+};
+const showSuccess = (res)=>{
+    return Toastify({
+        text: res.data.message,
+        duration: 1000
+    }).showToast();
+};
+
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2r7KE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -4849,43 +4880,59 @@ parcelHelpers.export(exports, "submitPost", ()=>submitPost);
 parcelHelpers.export(exports, "postLikes", ()=>postLikes);
 parcelHelpers.export(exports, "submitComment", ()=>submitComment);
 parcelHelpers.export(exports, "friendHandler", ()=>friendHandler);
+var _popup = require("./popup");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "/api/v1";
+const reload = ()=>window.setTimeout(()=>{
+        location.reload();
+    }, 1000);
 const submitPost = async (postObj)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
-        if (res.data.status === "success") location.reload();
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            reload();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const postLikes = async (postObj)=>{
     try {
         const res = await (0, _axiosDefault.default).patch(baseUrl + "/posts/likes", postObj);
-        if (res.data.status === "success") location.reload();
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            reload();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const submitComment = async (commentObj)=>{
     try {
         console.log(commentObj);
         const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
-        if (res.data.status === "success") location.reload();
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            reload();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 const friendHandler = async (id, request)=>{
     try {
         const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
-        if (res.data.status === "success") location.reload();
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            reload();
+        }
     } catch (err) {
-        console.log(err.response.data);
+        (0, _popup.showErr)(err);
     }
 };
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./popup":"9cLHk"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
 
 //# sourceMappingURL=index.js.map
