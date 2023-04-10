@@ -599,7 +599,6 @@ postForm && postForm.addEventListener("submit", (e)=>{
 });
 likeForms && likeForms.forEach((form)=>{
     form.addEventListener("click", (e)=>{
-        console.log(e.target.closest(".likes-form"));
         let target = e.target.closest(".likes-form");
         // e.preventDefault();
         const postId = target.querySelector("#postid").value;
@@ -4911,7 +4910,6 @@ const postLikes = async (postObj)=>{
 };
 const submitComment = async (commentObj)=>{
     try {
-        console.log(commentObj);
         const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
         if (res.data.status === "success") {
             (0, _popup.showSuccess)(res);

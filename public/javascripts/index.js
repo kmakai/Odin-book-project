@@ -51,7 +51,6 @@ postForm &&
 likeForms &&
   likeForms.forEach((form) => {
     form.addEventListener("click", (e) => {
-      console.log(e.target.closest(".likes-form"));
       let target = e.target.closest(".likes-form");
       // e.preventDefault();
       const postId = target.querySelector("#postid").value;

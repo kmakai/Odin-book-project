@@ -34,7 +34,6 @@ export const postLikes = async (postObj) => {
 
 export const submitComment = async (commentObj) => {
   try {
-    console.log(commentObj);
     const res = await axios.post(baseUrl + "/comments", commentObj);
     if (res.data.status === "success") {
       showSuccess(res);
