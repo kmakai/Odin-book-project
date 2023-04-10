@@ -697,7 +697,10 @@ const logout = async ()=>{
 const registerUser = async (userObj)=>{
     try {
         const res = await (0, _axiosDefault.default).post(baseUrl + "/users/register", userObj);
-        if (res.data.status === "success") (0, _popup.showSuccess)(res);
+        if (res.data.status === "success") {
+            (0, _popup.showSuccess)(res);
+            goHome();
+        }
     } catch (err) {
         (0, _popup.showErr)(err);
     }

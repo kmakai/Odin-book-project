@@ -49,6 +49,7 @@ export const registerUser = async (userObj) => {
 
     if (res.data.status === "success") {
       showSuccess(res);
+      goHome();
     }
   } catch (err) {
     showErr(err);
