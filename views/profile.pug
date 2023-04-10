@@ -26,6 +26,9 @@ block content
             a(href=`${friend.id}/profile`)  
               img(src= friend.photo ? friend.photo : `/images/default.jpg`, alt="user")
               p= friend.name
+            form.remove-form
+              input(type="hidden", name="profile-id" id="profile-id" value=`${friend.id}`)
+              button(class="rem-btn") remove
       .requests
         p.requests-title Pending Requests
         each friend in profile.friendRequests 

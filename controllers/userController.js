@@ -82,14 +82,16 @@ const removeFriend = asyncHandler(async (req, res, next) => {
   if (!friend) throw new Error("There is not such person");
 
   const { user } = req;
+  console.log(user);
 
   user.friends = user.friends.filter(
     (id) => id.toString() !== friend.id.toString()
   );
+  console.log(user.friends);
 
   await user.save();
 
-  res.status(200).json({
+  res.status(201).json({
     status: "success",
     message: "You removed the friend successfully",
   });

@@ -57,7 +57,9 @@
   }
 
   .req-btn,
-  .res-btn {
+  .res-btn,
+  .rej-btn,
+  .rem-btn {
     @apply border border-blue-700 px-2 mt-2 rounded-md text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
   /* header */

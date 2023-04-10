@@ -84,6 +84,28 @@ acceptForms &&
     })
   );
 
+const rejectForms = document.querySelectorAll(".reject-form");
+
+rejectForms &&
+  rejectForms.forEach((rejectForm) =>
+    rejectForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = e.target.querySelector("#profile-id").value;
+      friendHandler(id, "reject");
+    })
+  );
+
+const removeForms = document.querySelectorAll(".remove-form");
+
+removeForms &&
+  removeForms.forEach((removeForm) =>
+    removeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = e.target.querySelector("#profile-id").value;
+      friendHandler(id, "remove");
+    })
+  );
+
 const reqForms = document.querySelectorAll(".req-form");
 
 reqForms &&

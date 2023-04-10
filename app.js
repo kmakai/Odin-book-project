@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
+const cors = require("cors");
+const helmet = require("helmet");
 
 // DATABASE
 const connectDB = require("./DB/db");
@@ -26,9 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(cors());
+app.use(
+  helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false })
+);
 app.use(
   session({
-    secret: "somethingrandomgenerated",
+    secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: true,
   })

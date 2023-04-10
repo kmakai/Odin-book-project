@@ -11,3 +11,6 @@ mixin userCard(profile, opt)
       form.accept-form
         input(type="hidden", name="profile-id" id="profile-id" value=`${profile.id}`)
         button(class="res-btn") accept
+      form.reject-form
+        input(type="hidden", name="profile-id" id="profile-id" value=`${profile.id}`)
+        button(class="rej-btn") reject

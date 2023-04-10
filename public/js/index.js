@@ -629,6 +629,18 @@ acceptForms && acceptForms.forEach((acceptForm)=>acceptForm.addEventListener("su
         const id = e.target.querySelector("#profile-id").value;
         (0, _posthandlers.friendHandler)(id, "accept");
     }));
+const rejectForms = document.querySelectorAll(".reject-form");
+rejectForms && rejectForms.forEach((rejectForm)=>rejectForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const id = e.target.querySelector("#profile-id").value;
+        (0, _posthandlers.friendHandler)(id, "reject");
+    }));
+const removeForms = document.querySelectorAll(".remove-form");
+removeForms && removeForms.forEach((removeForm)=>removeForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const id = e.target.querySelector("#profile-id").value;
+        (0, _posthandlers.friendHandler)(id, "remove");
+    }));
 const reqForms = document.querySelectorAll(".req-form");
 reqForms && reqForms.forEach((reqForm)=>reqForm.addEventListener("submit", (e)=>{
         e.preventDefault();
@@ -4841,22 +4853,33 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 const baseUrl = "/api/v1";
 const submitPost = async (postObj)=>{
-    const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
-    if (res.data.status === "success") location.reload();
+    try {
+        const res = await (0, _axiosDefault.default).post(baseUrl + "/posts", postObj);
+        if (res.data.status === "success") location.reload();
+    } catch (err) {
+        console.log(err.response.data);
+    }
 };
 const postLikes = async (postObj)=>{
-    const res = await (0, _axiosDefault.default).patch(baseUrl + "/posts/likes", postObj);
-    if (res.data.status === "success") location.reload();
+    try {
+        const res = await (0, _axiosDefault.default).patch(baseUrl + "/posts/likes", postObj);
+        if (res.data.status === "success") location.reload();
+    } catch (err) {
+        console.log(err.response.data);
+    }
 };
 const submitComment = async (commentObj)=>{
-    console.log(commentObj);
-    const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
-    if (res.data.status === "success") location.reload();
+    try {
+        console.log(commentObj);
+        const res = await (0, _axiosDefault.default).post(baseUrl + "/comments", commentObj);
+        if (res.data.status === "success") location.reload();
+    } catch (err) {
+        console.log(err.response.data);
+    }
 };
 const friendHandler = async (id, request)=>{
     try {
         const res = await (0, _axiosDefault.default).patch(baseUrl + `/users/${id}/${request}-friend`);
-        console.log(res.data);
         if (res.data.status === "success") location.reload();
     } catch (err) {
         console.log(err.response.data);
