@@ -706,7 +706,58 @@ const registerUser = async (userObj)=>{
     }
 };
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./popup":"9cLHk"}],"jo6P5":[function(require,module,exports) {
+},{"./popup":"9cLHk","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9cLHk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "showErr", ()=>showErr);
+parcelHelpers.export(exports, "showSuccess", ()=>showSuccess);
+const showErr = (err)=>{
+    return Toastify({
+        text: err.response.data.message,
+        duration: 3000,
+        style: {
+            background: "linear-gradient(to right, #ef4444, #f87171)"
+        }
+    }).showToast();
+};
+const showSuccess = (res)=>{
+    return Toastify({
+        text: res.data.message,
+        duration: 1000
+    }).showToast();
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -724,13 +775,14 @@ parcelHelpers.export(exports, "toFormData", ()=>toFormData);
 parcelHelpers.export(exports, "AxiosHeaders", ()=>AxiosHeaders);
 parcelHelpers.export(exports, "HttpStatusCode", ()=>HttpStatusCode);
 parcelHelpers.export(exports, "formToJSON", ()=>formToJSON);
+parcelHelpers.export(exports, "getAdapter", ()=>getAdapter);
 parcelHelpers.export(exports, "mergeConfig", ()=>mergeConfig);
 var _axiosJs = require("./lib/axios.js");
 var _axiosJsDefault = parcelHelpers.interopDefault(_axiosJs);
 // This module is intended to unwrap Axios default export as named.
 // Keep top-level export same with static properties
 // so that it can keep same with es module or cjs
-const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , HttpStatusCode , formToJSON , mergeConfig  } = (0, _axiosJsDefault.default);
+const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , HttpStatusCode , formToJSON , getAdapter , mergeConfig  } = (0, _axiosJsDefault.default);
 
 },{"./lib/axios.js":"63MyY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"63MyY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -764,6 +816,8 @@ var _isAxiosErrorJs = require("./helpers/isAxiosError.js");
 var _isAxiosErrorJsDefault = parcelHelpers.interopDefault(_isAxiosErrorJs);
 var _axiosHeadersJs = require("./core/AxiosHeaders.js");
 var _axiosHeadersJsDefault = parcelHelpers.interopDefault(_axiosHeadersJs);
+var _adaptersJs = require("./adapters/adapters.js");
+var _adaptersJsDefault = parcelHelpers.interopDefault(_adaptersJs);
 var _httpStatusCodeJs = require("./helpers/HttpStatusCode.js");
 var _httpStatusCodeJsDefault = parcelHelpers.interopDefault(_httpStatusCodeJs);
 "use strict";
@@ -815,12 +869,13 @@ axios.isAxiosError = (0, _isAxiosErrorJsDefault.default);
 axios.mergeConfig = (0, _mergeConfigJsDefault.default);
 axios.AxiosHeaders = (0, _axiosHeadersJsDefault.default);
 axios.formToJSON = (thing)=>(0, _formDataToJSONJsDefault.default)((0, _utilsJsDefault.default).isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.getAdapter = (0, _adaptersJsDefault.default).getAdapter;
 axios.HttpStatusCode = (0, _httpStatusCodeJsDefault.default);
 axios.default = axios;
 // this module should only have a default export
 exports.default = axios;
 
-},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","./helpers/HttpStatusCode.js":"fdR61","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5By4s":[function(require,module,exports) {
+},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","./adapters/adapters.js":"d7JxI","./helpers/HttpStatusCode.js":"fdR61","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5By4s":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bindJs = require("./helpers/bind.js");
@@ -967,8 +1022,9 @@ const typeOfTest = (type)=>(thing)=>typeof thing === type;
  *
  * @returns {boolean} True if value is an FormData, otherwise false
  */ const isFormData = (thing)=>{
-    const pattern = "[object FormData]";
-    return thing && (typeof FormData === "function" && thing instanceof FormData || toString.call(thing) === pattern || isFunction(thing.toString) && thing.toString() === pattern);
+    let kind;
+    return thing && (typeof FormData === "function" && thing instanceof FormData || isFunction(thing.append) && ((kind = kindOf(thing)) === "formdata" || // detect form-data instance
+    kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]"));
 };
 /**
  * Determine if a value is a URLSearchParams object
@@ -1231,7 +1287,8 @@ const reduceDescriptors = (obj, reducer)=>{
     const descriptors = Object.getOwnPropertyDescriptors(obj);
     const reducedDescriptors = {};
     forEach(descriptors, (descriptor, name)=>{
-        if (reducer(descriptor, name, obj) !== false) reducedDescriptors[name] = descriptor;
+        let ret;
+        if ((ret = reducer(descriptor, name, obj)) !== false) reducedDescriptors[name] = ret || descriptor;
     });
     Object.defineProperties(obj, reducedDescriptors);
 };
@@ -1315,6 +1372,8 @@ const toJSONObject = (obj)=>{
     };
     return visit(obj, 0);
 };
+const isAsyncFn = kindOfTest("AsyncFunction");
+const isThenable = (thing)=>thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
 exports.default = {
     isArray,
     isArrayBuffer,
@@ -1364,7 +1423,9 @@ exports.default = {
     ALPHABET,
     generateString,
     isSpecCompliantForm,
-    toJSONObject
+    toJSONObject,
+    isAsyncFn,
+    isThenable
 };
 
 },{"./helpers/bind.js":"haRQb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"haRQb":[function(require,module,exports) {
@@ -1378,37 +1439,7 @@ function bind(fn, thisArg) {
 }
 exports.default = bind;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"cpqD8":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cpqD8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsJs = require("./../utils.js");
@@ -1463,16 +1494,20 @@ const validators = (0, _validatorJsDefault.default).validators;
             forcedJSONParsing: validators.transitional(validators.boolean),
             clarifyTimeoutError: validators.transitional(validators.boolean)
         }, false);
-        if (paramsSerializer !== undefined) (0, _validatorJsDefault.default).assertOptions(paramsSerializer, {
-            encode: validators.function,
-            serialize: validators.function
-        }, true);
+        if (paramsSerializer != null) {
+            if ((0, _utilsJsDefault.default).isFunction(paramsSerializer)) config.paramsSerializer = {
+                serialize: paramsSerializer
+            };
+            else (0, _validatorJsDefault.default).assertOptions(paramsSerializer, {
+                encode: validators.function,
+                serialize: validators.function
+            }, true);
+        }
         // Set config.method
         config.method = (config.method || this.defaults.method || "get").toLowerCase();
-        let contextHeaders;
         // Flatten headers
-        contextHeaders = headers && (0, _utilsJsDefault.default).merge(headers.common, headers[config.method]);
-        contextHeaders && (0, _utilsJsDefault.default).forEach([
+        let contextHeaders = headers && (0, _utilsJsDefault.default).merge(headers.common, headers[config.method]);
+        headers && (0, _utilsJsDefault.default).forEach([
             "delete",
             "get",
             "head",
@@ -1676,7 +1711,7 @@ var _axiosErrorJsDefault = parcelHelpers.interopDefault(_axiosErrorJs);
 // temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
 var _formDataJs = require("../platform/node/classes/FormData.js");
 var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
-var Buffer = require("2af92ab089215104").Buffer;
+var Buffer = require("923f135ce696ac30").Buffer;
 "use strict";
 /**
  * Determines if the given thing is a array or js object.
@@ -1831,15 +1866,15 @@ const predicates = (0, _utilsJsDefault.default).toFlatObject((0, _utilsJsDefault
 }
 exports.default = toFormData;
 
-},{"2af92ab089215104":"fCgem","../utils.js":"5By4s","../core/AxiosError.js":"3u8Tl","../platform/node/classes/FormData.js":"aFlee","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fCgem":[function(require,module,exports) {
+},{"923f135ce696ac30":"fCgem","../utils.js":"5By4s","../core/AxiosError.js":"3u8Tl","../platform/node/classes/FormData.js":"aFlee","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fCgem":[function(require,module,exports) {
 /*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */ /* eslint-disable no-proto */ "use strict";
-var base64 = require("2e95d6fe5bdc3b5");
-var ieee754 = require("3f3ef773c5a733cc");
+var base64 = require("1375f3e0ce30c8f6");
+var ieee754 = require("aafe901b23f99954");
 var customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" // eslint-disable-line dot-notation
  ? Symbol["for"]("nodejs.util.inspect.custom") // eslint-disable-line dot-notation
  : null;
@@ -3061,7 +3096,7 @@ var hexSliceLookupTable = function() {
     return table;
 }();
 
-},{"2e95d6fe5bdc3b5":"eIiSV","3f3ef773c5a733cc":"cO95r"}],"eIiSV":[function(require,module,exports) {
+},{"1375f3e0ce30c8f6":"eIiSV","aafe901b23f99954":"cO95r"}],"eIiSV":[function(require,module,exports) {
 "use strict";
 exports.byteLength = byteLength;
 exports.toByteArray = toByteArray;
@@ -3482,9 +3517,6 @@ var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
 var _formDataToJSONJs = require("../helpers/formDataToJSON.js");
 var _formDataToJSONJsDefault = parcelHelpers.interopDefault(_formDataToJSONJs);
 "use strict";
-const DEFAULT_CONTENT_TYPE = {
-    "Content-Type": undefined
-};
 /**
  * It takes a string, tries to parse it, and if it fails, it returns the stringified version
  * of the input
@@ -3580,23 +3612,20 @@ const defaults = {
     },
     headers: {
         common: {
-            "Accept": "application/json, text/plain, */*"
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": undefined
         }
     }
 };
 (0, _utilsJsDefault.default).forEach([
     "delete",
     "get",
-    "head"
-], function forEachMethodNoData(method) {
-    defaults.headers[method] = {};
-});
-(0, _utilsJsDefault.default).forEach([
+    "head",
     "post",
     "put",
     "patch"
-], function forEachMethodWithData(method) {
-    defaults.headers[method] = (0, _utilsJsDefault.default).merge(DEFAULT_CONTENT_TYPE);
+], (method)=>{
+    defaults.headers[method] = {};
 });
 exports.default = defaults;
 
@@ -3636,11 +3665,15 @@ exports.default = toURLEncodedForm;
 },{"../utils.js":"5By4s","./toFormData.js":"ajoez","../platform/index.js":"7tDev","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7tDev":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _indexJsDefault.default));
 var _indexJs = require("./node/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _utilsJs = require("./common/utils.js");
+exports.default = {
+    ..._utilsJs,
+    ...(0, _indexJsDefault.default)
+};
 
-},{"./node/index.js":"cVeqE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cVeqE":[function(require,module,exports) {
+},{"./node/index.js":"cVeqE","./common/utils.js":"iIwkL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cVeqE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _urlsearchParamsJs = require("./classes/URLSearchParams.js");
@@ -3649,39 +3682,6 @@ var _formDataJs = require("./classes/FormData.js");
 var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
 var _blobJs = require("./classes/Blob.js");
 var _blobJsDefault = parcelHelpers.interopDefault(_blobJs);
-/**
- * Determine if we're running in a standard browser environment
- *
- * This allows axios to run in a web worker, and react-native.
- * Both environments support XMLHttpRequest, but not fully standard globals.
- *
- * web workers:
- *  typeof window -> undefined
- *  typeof document -> undefined
- *
- * react-native:
- *  navigator.product -> 'ReactNative'
- * nativescript
- *  navigator.product -> 'NativeScript' or 'NS'
- *
- * @returns {boolean}
- */ const isStandardBrowserEnv = (()=>{
-    let product;
-    if (typeof navigator !== "undefined" && ((product = navigator.product) === "ReactNative" || product === "NativeScript" || product === "NS")) return false;
-    return typeof window !== "undefined" && typeof document !== "undefined";
-})();
-/**
- * Determine if we're running in a standard browser webWorker environment
- *
- * Although the `isStandardBrowserEnv` method indicates that
- * `allows axios to run in a web worker`, the WebWorker will still be
- * filtered out due to its judgment standard
- * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
- * This leads to a problem when axios post `FormData` in webWorker
- */ const isStandardBrowserWebWorkerEnv = (()=>{
-    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
-    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
-})();
 exports.default = {
     isBrowser: true,
     classes: {
@@ -3689,8 +3689,6 @@ exports.default = {
         FormData: (0, _formDataJsDefault.default),
         Blob: (0, _blobJsDefault.default)
     },
-    isStandardBrowserEnv,
-    isStandardBrowserWebWorkerEnv,
     protocols: [
         "http",
         "https",
@@ -3720,6 +3718,49 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 "use strict";
 exports.default = typeof Blob !== "undefined" ? Blob : null;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iIwkL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "hasBrowserEnv", ()=>hasBrowserEnv);
+parcelHelpers.export(exports, "hasStandardBrowserWebWorkerEnv", ()=>hasStandardBrowserWebWorkerEnv);
+parcelHelpers.export(exports, "hasStandardBrowserEnv", ()=>hasStandardBrowserEnv);
+const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ *
+ * @returns {boolean}
+ */ const hasStandardBrowserEnv = ((product)=>{
+    return hasBrowserEnv && [
+        "ReactNative",
+        "NativeScript",
+        "NS"
+    ].indexOf(product) < 0;
+})(typeof navigator !== "undefined" && navigator.product);
+/**
+ * Determine if we're running in a standard browser webWorker environment
+ *
+ * Although the `isStandardBrowserEnv` method indicates that
+ * `allows axios to run in a web worker`, the WebWorker will still be
+ * filtered out due to its judgment standard
+ * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
+ * This leads to a problem when axios post `FormData` in webWorker
+ */ const hasStandardBrowserWebWorkerEnv = (()=>{
+    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"01RfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -3819,9 +3860,7 @@ function parseTokens(str) {
     while(match = tokensRE.exec(str))tokens[match[1]] = match[2];
     return tokens;
 }
-function isValidHeaderName(str) {
-    return /^[-_a-zA-Z]+$/.test(str.trim());
-}
+const isValidHeaderName = (str)=>/^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
 function matchHeaderValue(context, value, header, filter, isHeaderNameFilter) {
     if ((0, _utilsJsDefault.default).isFunction(filter)) return filter.call(this, value, header);
     if (isHeaderNameFilter) value = header;
@@ -3988,7 +4027,16 @@ AxiosHeaders.accessor([
     "User-Agent",
     "Authorization"
 ]);
-(0, _utilsJsDefault.default).freezeMethods(AxiosHeaders.prototype);
+// reserved names hotfix
+(0, _utilsJsDefault.default).reduceDescriptors(AxiosHeaders.prototype, ({ value  }, key)=>{
+    let mapped = key[0].toUpperCase() + key.slice(1); // map `set` => `Set`
+    return {
+        get: ()=>value,
+        set (headerValue) {
+            this[mapped] = headerValue;
+        }
+    };
+});
 (0, _utilsJsDefault.default).freezeMethods(AxiosHeaders);
 exports.default = AxiosHeaders;
 
@@ -4116,6 +4164,8 @@ const knownAdapters = {
         });
     }
 });
+const renderReason = (reason)=>`- ${reason}`;
+const isResolvedHandle = (adapter)=>(0, _utilsJsDefault.default).isFunction(adapter) || adapter === null || adapter === false;
 exports.default = {
     getAdapter: (adapters)=>{
         adapters = (0, _utilsJsDefault.default).isArray(adapters) ? adapters : [
@@ -4124,15 +4174,23 @@ exports.default = {
         const { length  } = adapters;
         let nameOrAdapter;
         let adapter;
+        const rejectedReasons = {};
         for(let i = 0; i < length; i++){
             nameOrAdapter = adapters[i];
-            if (adapter = (0, _utilsJsDefault.default).isString(nameOrAdapter) ? knownAdapters[nameOrAdapter.toLowerCase()] : nameOrAdapter) break;
+            let id;
+            adapter = nameOrAdapter;
+            if (!isResolvedHandle(nameOrAdapter)) {
+                adapter = knownAdapters[(id = String(nameOrAdapter)).toLowerCase()];
+                if (adapter === undefined) throw new (0, _axiosErrorJsDefault.default)(`Unknown adapter '${id}'`);
+            }
+            if (adapter) break;
+            rejectedReasons[id || "#" + i] = adapter;
         }
         if (!adapter) {
-            if (adapter === false) throw new (0, _axiosErrorJsDefault.default)(`Adapter ${nameOrAdapter} is not supported by the environment`, "ERR_NOT_SUPPORT");
-            throw new Error((0, _utilsJsDefault.default).hasOwnProp(knownAdapters, nameOrAdapter) ? `Adapter '${nameOrAdapter}' is not available in the build` : `Unknown adapter '${nameOrAdapter}'`);
+            const reasons = Object.entries(rejectedReasons).map(([id, state])=>`adapter ${id} ` + (state === false ? "is not supported by the environment" : "is not available in the build"));
+            let s = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
+            throw new (0, _axiosErrorJsDefault.default)(`There is no suitable adapter to dispatch the request ` + s, "ERR_NOT_SUPPORT");
         }
-        if (!(0, _utilsJsDefault.default).isFunction(adapter)) throw new TypeError("adapter is not a function");
         return adapter;
     },
     adapters: knownAdapters
@@ -4196,13 +4254,24 @@ exports.default = isXHRAdapterSupported && function(config) {
     return new Promise(function dispatchXhrRequest(resolve, reject) {
         let requestData = config.data;
         const requestHeaders = (0, _axiosHeadersJsDefault.default).from(config.headers).normalize();
-        const responseType = config.responseType;
+        let { responseType , withXSRFToken  } = config;
         let onCanceled;
         function done() {
             if (config.cancelToken) config.cancelToken.unsubscribe(onCanceled);
             if (config.signal) config.signal.removeEventListener("abort", onCanceled);
         }
-        if ((0, _utilsJsDefault.default).isFormData(requestData) && ((0, _indexJsDefault.default).isStandardBrowserEnv || (0, _indexJsDefault.default).isStandardBrowserWebWorkerEnv)) requestHeaders.setContentType(false); // Let the browser set it
+        let contentType;
+        if ((0, _utilsJsDefault.default).isFormData(requestData)) {
+            if ((0, _indexJsDefault.default).hasStandardBrowserEnv || (0, _indexJsDefault.default).hasStandardBrowserWebWorkerEnv) requestHeaders.setContentType(false); // Let the browser set it
+            else if ((contentType = requestHeaders.getContentType()) !== false) {
+                // fix semicolon duplication issue for ReactNative FormData implementation
+                const [type, ...tokens] = contentType ? contentType.split(";").map((token)=>token.trim()).filter(Boolean) : [];
+                requestHeaders.setContentType([
+                    type || "multipart/form-data",
+                    ...tokens
+                ].join("; "));
+            }
+        }
         let request = new XMLHttpRequest();
         // HTTP basic authentication
         if (config.auth) {
@@ -4278,10 +4347,13 @@ exports.default = isXHRAdapterSupported && function(config) {
         // Add xsrf header
         // This is only done if running in a standard browser environment.
         // Specifically not if we're in a web worker, or react-native.
-        if ((0, _indexJsDefault.default).isStandardBrowserEnv) {
-            // Add xsrf header
-            const xsrfValue = (config.withCredentials || (0, _isURLSameOriginJsDefault.default)(fullPath)) && config.xsrfCookieName && (0, _cookiesJsDefault.default).read(config.xsrfCookieName);
-            if (xsrfValue) requestHeaders.set(config.xsrfHeaderName, xsrfValue);
+        if ((0, _indexJsDefault.default).hasStandardBrowserEnv) {
+            withXSRFToken && (0, _utilsJsDefault.default).isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(config));
+            if (withXSRFToken || withXSRFToken !== false && (0, _isURLSameOriginJsDefault.default)(fullPath)) {
+                // Add xsrf header
+                const xsrfValue = config.xsrfHeaderName && config.xsrfCookieName && (0, _cookiesJsDefault.default).read(config.xsrfCookieName);
+                if (xsrfValue) requestHeaders.set(config.xsrfHeaderName, xsrfValue);
+            }
         }
         // Remove Content-Type if data is undefined
         requestData === undefined && requestHeaders.setContentType(null);
@@ -4342,37 +4414,33 @@ var _utilsJs = require("./../utils.js");
 var _utilsJsDefault = parcelHelpers.interopDefault(_utilsJs);
 var _indexJs = require("../platform/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
-"use strict";
-exports.default = (0, _indexJsDefault.default).isStandardBrowserEnv ? // Standard browser envs support document.cookie
-function standardBrowserEnv() {
-    return {
-        write: function write(name, value, expires, path, domain, secure) {
-            const cookie = [];
-            cookie.push(name + "=" + encodeURIComponent(value));
-            if ((0, _utilsJsDefault.default).isNumber(expires)) cookie.push("expires=" + new Date(expires).toGMTString());
-            if ((0, _utilsJsDefault.default).isString(path)) cookie.push("path=" + path);
-            if ((0, _utilsJsDefault.default).isString(domain)) cookie.push("domain=" + domain);
-            if (secure === true) cookie.push("secure");
-            document.cookie = cookie.join("; ");
-        },
-        read: function read(name) {
-            const match = document.cookie.match(new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"));
-            return match ? decodeURIComponent(match[3]) : null;
-        },
-        remove: function remove(name) {
-            this.write(name, "", Date.now() - 86400000);
-        }
-    };
-}() : // Non standard browser env (web workers, react-native) lack needed support.
-function nonStandardBrowserEnv() {
-    return {
-        write: function write() {},
-        read: function read() {
-            return null;
-        },
-        remove: function remove() {}
-    };
-}();
+exports.default = (0, _indexJsDefault.default).hasStandardBrowserEnv ? // Standard browser envs support document.cookie
+{
+    write (name, value, expires, path, domain, secure) {
+        const cookie = [
+            name + "=" + encodeURIComponent(value)
+        ];
+        (0, _utilsJsDefault.default).isNumber(expires) && cookie.push("expires=" + new Date(expires).toGMTString());
+        (0, _utilsJsDefault.default).isString(path) && cookie.push("path=" + path);
+        (0, _utilsJsDefault.default).isString(domain) && cookie.push("domain=" + domain);
+        secure === true && cookie.push("secure");
+        document.cookie = cookie.join("; ");
+    },
+    read (name) {
+        const match = document.cookie.match(new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"));
+        return match ? decodeURIComponent(match[3]) : null;
+    },
+    remove (name) {
+        this.write(name, "", Date.now() - 86400000);
+    }
+} : // Non-standard browser env (web workers, react-native) lack needed support.
+{
+    write () {},
+    read () {
+        return null;
+    },
+    remove () {}
+};
 
 },{"./../utils.js":"5By4s","../platform/index.js":"7tDev","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1I5TW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4417,14 +4485,14 @@ var _utilsJsDefault = parcelHelpers.interopDefault(_utilsJs);
 var _indexJs = require("../platform/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
 "use strict";
-exports.default = (0, _indexJsDefault.default).isStandardBrowserEnv ? // Standard browser envs have full support of the APIs needed to test
+exports.default = (0, _indexJsDefault.default).hasStandardBrowserEnv ? // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
 function standardBrowserEnv() {
     const msie = /(msie|trident)/i.test(navigator.userAgent);
     const urlParsingNode = document.createElement("a");
     let originURL;
     /**
-    * Parse a URL to discover it's components
+    * Parse a URL to discover its components
     *
     * @param {String} url The URL to be parsed
     * @returns {Object}
@@ -4564,6 +4632,7 @@ function mergeConfig(config1, config2) {
         timeout: defaultToConfig2,
         timeoutMessage: defaultToConfig2,
         withCredentials: defaultToConfig2,
+        withXSRFToken: defaultToConfig2,
         adapter: defaultToConfig2,
         responseType: defaultToConfig2,
         xsrfCookieName: defaultToConfig2,
@@ -4583,7 +4652,7 @@ function mergeConfig(config1, config2) {
         validateStatus: mergeDirectKeys,
         headers: (a, b)=>mergeDeepProperties(headersToObject(a), headersToObject(b), true)
     };
-    (0, _utilsJsDefault.default).forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
+    (0, _utilsJsDefault.default).forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
         const merge = mergeMap[prop] || mergeDeepProperties;
         const configValue = merge(config1[prop], config2[prop], prop);
         (0, _utilsJsDefault.default).isUndefined(configValue) && merge !== mergeDirectKeys || (config[prop] = configValue);
@@ -4670,7 +4739,7 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VERSION", ()=>VERSION);
-const VERSION = "1.3.4";
+const VERSION = "1.6.2";
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"45wzn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4854,27 +4923,6 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
 });
 exports.default = HttpStatusCode;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9cLHk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "showErr", ()=>showErr);
-parcelHelpers.export(exports, "showSuccess", ()=>showSuccess);
-const showErr = (err)=>{
-    return Toastify({
-        text: err.response.data.message,
-        duration: 3000,
-        style: {
-            background: "linear-gradient(to right, #ef4444, #f87171)"
-        }
-    }).showToast();
-};
-const showSuccess = (res)=>{
-    return Toastify({
-        text: res.data.message,
-        duration: 1000
-    }).showToast();
-};
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2r7KE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -4934,6 +4982,6 @@ const friendHandler = async (id, request)=>{
     }
 };
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./popup":"9cLHk"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
+},{"./popup":"9cLHk","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8oEcm","8h7jx"], "8h7jx", "parcelRequire0074")
 
 //# sourceMappingURL=index.js.map
