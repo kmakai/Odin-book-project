@@ -17,7 +17,7 @@
   }
 
   .post-form {
-    @apply border border-slate-200 rounded-sm flex flex-col p-2 h-auto gap-2;
+    @apply border-slate-200 rounded-sm flex flex-col p-2 h-auto gap-2;
   }
 
   .post-form#postContent {
@@ -50,7 +50,7 @@
   }
 
   .user-card a {
-    @apply p-2 flex flex-col items-center border;
+    @apply p-2 flex flex-col items-center;
   }
   .user-card .req-form {
     @apply flex justify-center;
@@ -60,7 +60,7 @@
   .res-btn,
   .rej-btn,
   .rem-btn {
-    @apply border border-blue-700 px-2 mt-2 rounded-md text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+    @apply border border-blue-700 px-2 mt-2 rounded text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
   /* header */
   .header {
@@ -84,7 +84,7 @@
   }
 
   .log-out {
-    @apply border border-blue-700 p-2 font-semibold rounded-md text-white bg-blue-700 hover:bg-white hover:text-blue-700;
+    @apply border border-blue-700 p-2 font-semibold text-white bg-blue-700 hover:bg-white hover:text-blue-700;
   }
 
   .logo {
@@ -184,7 +184,7 @@
   }
 
   .allusers {
-    @apply flex flex-col gap-4 p-4 h-auto justify-start border self-start;
+    @apply flex flex-col gap-4 p-4 h-auto justify-start self-start;
   }
 
   .users-container {
@@ -196,7 +196,7 @@
   }
 
   .comment-card {
-    @apply border flex flex-col gap-y-2 p-2;
+    @apply flex flex-col gap-y-2 p-2;
   }
 
   .comment-card .comment-text {
@@ -217,7 +217,7 @@
   }
 
   .profile-page .posts {
-    @apply border p-2 md:col-start-2 md:col-end-4 md:row-start-1 md:row-span-full md:max-w-full md:self-start;
+    @apply p-2 md:col-start-2 md:col-end-4 md:row-start-1 md:row-span-full md:max-w-full md:self-start;
   }
 
   .friends-requests {
@@ -226,7 +226,7 @@
 
   .friends,
   .requests {
-    @apply border rounded-md p-2 grid grid-cols-2 gap-2 lg:grid-cols-3;
+    @apply rounded-md p-2 grid grid-cols-2 gap-2 lg:grid-cols-3;
   }
   .friends-title,
   .requests-title {
@@ -234,7 +234,7 @@
   }
 
   .requests {
-    @apply rounded-md border p-2;
+    @apply rounded-md p-2;
   }
 
   /* Footer */
