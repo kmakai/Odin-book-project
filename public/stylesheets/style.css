@@ -486,12 +486,27 @@ video {
   .user-card a {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 0.5rem;
 }
   .user-card .req-form {
+  margin-left: 0.5rem;
   display: flex;
-  justify-content: center;
+}
+  .user-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  padding: 0.5rem;
+}
+
+  .user-card .accept-form,
+  .user-card .reject-form {
+  margin-left: 0.5rem;
+}
+  .user-card .accept-form {
+  margin-top: auto;
 }
 
   .req-btn,

@@ -51,10 +51,21 @@
   }
 
   .user-card a {
-    @apply p-2 flex flex-col items-center;
+    @apply p-2 flex flex-col;
   }
   .user-card .req-form {
-    @apply flex justify-center;
+    @apply flex ml-2;
+  }
+  .user-card {
+    @apply flex flex-col gap-2 p-2  border rounded-md;
+  }
+
+  .user-card .accept-form,
+  .user-card .reject-form {
+    @apply ml-2;
+  }
+  .user-card .accept-form {
+    @apply mt-auto;
   }
 
   .req-btn,
