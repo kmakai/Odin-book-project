@@ -25,7 +25,7 @@ block content
           .user-card
             a(href=`${friend.id}/profile`)  
               img(src= friend.photo ? friend.photo : `/images/default.jpg`, alt="user")
-              p= friend.name
+              p= friend.name.split(" ")[0]
             form.remove-form
               input(type="hidden", name="profile-id" id="profile-id" value=`${friend.id}`)
               button(class="rem-btn") remove
